@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.MediTime" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/dark</item>
+    </style>
+
+    <style name="shadow">
+        <item name="android:shadowColor">@color/shadow</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">14.2</item>
+    </style>
+
+    <style name="text_style">
+        <item name="fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/dark10</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
+    <style name="subheader_style" parent="text_style">
+        <item name="fontFamily">@font/inter_bold</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+</resources>

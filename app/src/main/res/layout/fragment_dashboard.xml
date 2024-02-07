@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DashboardFragment"
+    android:background="@color/light10"
+    android:id="@+id/dashboard">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="32dp"
+            android:layout_marginHorizontal="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="22dp">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Good day, Roche!"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="15sp"
+                    android:textColor="@color/dark10"
+                    android:textAppearance="@style/shadow"/>
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your Medication List"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:textSize="20sp"
+                    android:textColor="@color/dark10"
+                    android:textAppearance="@style/shadow"
+                    android:gravity="center"
+                    android:layout_marginTop="32dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="250dp"
+                android:orientation="vertical"
+                android:background="@drawable/medi_container"
+                android:alpha="0.67"
+                android:layout_marginBottom="7dp"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/insideMedi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Inside MediTime"
+                    android:textAllCaps="true"
+                    android:textColor="@color/light"
+                    android:textAppearance="@style/shadow"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:textSize="13sp"
+                    android:letterSpacing=".15"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="250dp"
+                android:orientation="vertical"
+                android:background="@drawable/medi_container"
+                android:alpha="0.67"
+                android:layout_marginBottom="22dp"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/outsideMedi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Outside MediTime"
+                    android:textAllCaps="true"
+                    android:textColor="@color/light"
+                    android:textAppearance="@style/shadow"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:textSize="13sp"
+                    android:letterSpacing=".15"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="172dp"
+                android:layout_height="wrap_content"
+                android:text="Add Medication"
+                android:background="@drawable/buton"
+                android:fontFamily="@font/inter_extrabold"
+                android:textSize="12sp"
+                android:textColor="@color/dark10"
+                android:letterSpacing=".15"
+                android:layout_gravity="end"/>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddMed"
+    android:background="@color/light10"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:orientation="horizontal"
+        android:background="@drawable/toolbar"
+        android:gravity="center"
+        android:paddingHorizontal="23dp">
+
+        <ImageView
+            android:id="@+id/backHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/back_ios"
+            android:layout_marginEnd="17dp"
+            />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add New"
+            android:textAllCaps="true"
+            android:fontFamily="@font/inter_extrabold"
+            android:textSize="15sp"
+            android:letterSpacing="0.09"
+            android:textAppearance="@style/shadow"
+            android:textColor="@color/light"/>
+
+        <ImageView
+            android:id="@+id/saveMedi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/check_circle" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="32dp"
+            android:layout_marginHorizontal="20dp">
+
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="For Everyday Schedule"
+                android:fontFamily="@font/inter_extrabold"
+                android:textSize="20sp"
+                android:textColor="@color/dark"
+                android:letterSpacing="0.05"
+                android:textAppearance="@style/shadow"
+                android:gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="68dp">
+
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Time"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="12sp"
+                    android:textColor="@color/dark"
+                    android:letterSpacing="0.05"
+                    android:textAppearance="@style/shadow"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="How many pills?"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="12sp"
+                    android:textColor="@color/dark"
+                    android:letterSpacing="0.05"
+                    android:textAppearance="@style/shadow"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="13dp">
+
+                <EditText
+                    android:id="@+id/editTextTime2"
+                    android:layout_width="87dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_weight="1"
+                    android:inputType="time"
+                    android:background="@drawable/light_bg"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
