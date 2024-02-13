@@ -34,11 +34,11 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_extrabold"
                 android:text="GO BACK"
-                android:textAlignment="textStart"
                 android:textColor="@color/light"
                 android:textSize="15sp"
                 android:letterSpacing="0.09"
-                style="@style/shadow" />
+                style="@style/shadow"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 

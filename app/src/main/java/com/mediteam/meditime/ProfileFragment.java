@@ -26,13 +26,15 @@ import com.squareup.picasso.Picasso;
 
 import java.io.FileReader;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
     private DatabaseReference reference;
     private TextView userFN, userUN;
-    private ImageView userDP;
+    private CircleImageView userDP;
     private Button changeUN, changeEmail, changePass, changePin, delAcc;
 
 
@@ -85,6 +87,7 @@ public class ProfileFragment extends Fragment {
                             .placeholder(R.drawable.user_profile)
                             .resize(100, 100)
                             .centerCrop()
+                            .noFade()
                             .into(userDP);
                 } else {
                     Toast.makeText(getActivity(), "Something went wrong!",

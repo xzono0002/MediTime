@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".DashboardFragment"
     android:background="@color/light10"
     android:id="@+id/dashboard">
@@ -26,7 +27,7 @@
                 android:layout_marginBottom="22dp">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/greetUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Good day, Roche!"
@@ -36,7 +37,6 @@
                     android:textAppearance="@style/shadow"/>
 
                 <TextView
-                    android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Your Medication List"
@@ -95,7 +95,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/addMedic"
                 android:layout_width="172dp"
                 android:layout_height="wrap_content"
                 android:text="Add Medication"
@@ -104,8 +104,8 @@
                 android:textSize="12sp"
                 android:textColor="@color/dark10"
                 android:letterSpacing=".15"
-                android:layout_gravity="end"/>
-
+                android:layout_gravity="end"
+                style="@style/shadow"/>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

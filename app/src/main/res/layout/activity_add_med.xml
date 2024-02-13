@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,249 +9,252 @@
     android:background="@color/light10"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:orientation="horizontal"
-        android:background="@drawable/toolbar"
-        android:gravity="center"
-        android:paddingHorizontal="23dp">
-
-        <ImageView
-            android:id="@+id/backHome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/back_ios"
-            android:layout_marginEnd="17dp"
-            />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Add New"
-            android:textAllCaps="true"
-            android:fontFamily="@font/inter_extrabold"
-            android:textSize="15sp"
-            android:letterSpacing="0.09"
-            android:textAppearance="@style/shadow"
-            android:textColor="@color/light"/>
-
-        <ImageView
-            android:id="@+id/saveMedi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/check_circle" />
-
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingVertical="32dp"
-            android:layout_marginHorizontal="20dp">
+            android:animateLayoutChanges="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginBottom="56dp">
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Enter medication"
-                    android:layout_marginBottom="7dp"
-                    android:fontFamily="@font/inter_extrabold"
-                    android:textSize="15sp"
-                    android:letterSpacing="0.05"
-                    android:textColor="@color/dark"/>
-
-                <EditText
-                    android:id="@+id/editTextTextPersonName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:hint="Type your Medication (eg. Losartan - 50mg)"
-                    android:background="@drawable/light_bg"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textSize="11sp"
-                    android:padding="11dp"
-                    android:textColor="@color/shadow"
-                    android:letterSpacing="0.05"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView9"
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/addMedToolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Select dosage form:"
-                    android:layout_marginBottom="7dp"
-                    android:fontFamily="@font/inter_extrabold"
-                    android:textSize="15sp"
-                    android:letterSpacing="0.05"
-                    android:textColor="@color/dark"/>
+                    android:layout_height="70dp"
+                    android:background="@drawable/toolbar"
+                    android:paddingHorizontal="20dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageButton
+                            android:id="@+id/backHome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/back_ios"
+                            android:layout_gravity="center"
+                            android:background="@color/transparent"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Add New"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/inter_extrabold"
+                            android:textSize="15sp"
+                            android:letterSpacing="0.09"
+                            android:textAppearance="@style/shadow"
+                            android:textColor="@color/light"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:paddingStart="17dp" />
+
+                        <ImageButton
+                            android:id="@+id/saveMedi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/check_circle"
+                            android:layout_marginEnd="20dp"
+                            android:background="@color/transparent"/>
+
+                    </LinearLayout>
+
+                </androidx.appcompat.widget.Toolbar>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="59dp">
-
-                    <Button
-                        android:id="@+id/button4"
-                        android:layout_width="39dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Tablet"
-                        android:textAppearance="@style/shadow"
-                        android:fontFamily="@font/inter_bold"
-                        android:textSize="12sp"
-                        android:letterSpacing="0.03"
-                        android:textColor="@color/dark"
-                        android:background="@drawable/buton"
-                        android:layout_marginEnd="22dp"/>
-
-                    <Button
-                        android:id="@+id/button5"
-                        android:layout_width="39dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Capsule"
-                        android:textAppearance="@style/shadow"
-                        android:fontFamily="@font/inter_bold"
-                        android:textSize="12sp"
-                        android:letterSpacing="0.03"
-                        android:textColor="@color/dark"
-                        android:background="@drawable/buton"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Where will you store it?"
-                    android:layout_marginBottom="7dp"
-                    android:fontFamily="@font/inter_extrabold"
-                    android:textSize="15sp"
-                    android:letterSpacing="0.05"
-                    android:textColor="@color/dark"/>
+                    android:layout_marginHorizontal="20dp"
+                    android:orientation="vertical"
+                    android:paddingVertical="34dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="59dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/button6"
-                        android:layout_width="39dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Inside MediTime"
-                        android:textAppearance="@style/shadow"
-                        android:fontFamily="@font/inter_bold"
-                        android:textSize="12sp"
-                        android:letterSpacing="0.03"
-                        android:textColor="@color/dark"
-                        android:background="@drawable/buton"
-                        android:layout_marginEnd="22dp"/>
+                        <TextView
+                            style="@style/shadow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="13dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:letterSpacing="0.05"
+                            android:text="Enter medication:"
+                            android:textColor="@color/dark"
+                            android:textSize="12sp" />
 
-                    <Button
-                        android:id="@+id/button7"
-                        android:layout_width="39dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Outside MediTime"
-                        android:textAppearance="@style/shadow"
-                        android:fontFamily="@font/inter_bold"
-                        android:textSize="12sp"
-                        android:letterSpacing="0.03"
-                        android:textColor="@color/dark"
-                        android:background="@drawable/buton"/>
+                        <EditText
+                            android:id="@+id/etMedication"
+                            style="@style/shadow"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:background="@drawable/light_bg"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:hint="Losartan - 50mg"
+                            android:inputType="textPersonName"
+                            android:letterSpacing="0.05"
+                            android:paddingHorizontal="14dp"
+                            android:textColor="@color/dark20"
+                            android:textColorHint="@color/dark20"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="13dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/shadow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/inter_bold"
+                            android:letterSpacing="0.05"
+                            android:text="Select Tube:"
+                            android:textColor="@color/dark"
+                            android:textSize="12sp" />
+
+                        <Spinner
+                            android:id="@+id/tubeSelect"
+                            android:layout_width="match_parent"
+                            android:layout_height="33dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/add_med_spinner"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="0dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/shadow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:letterSpacing="0.05"
+                            android:text="Select dosage form:"
+                            android:textColor="@color/dark"
+                            android:textSize="12sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/tablet"
+                                style="@style/shadow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_marginEnd="22dp"
+                                android:background="@drawable/add_med_button_normal"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:letterSpacing="0.03"
+                                android:paddingHorizontal="24dp"
+                                android:text="Tablet"
+                                android:textAppearance="@style/shadow"
+                                android:textColor="@color/light"
+                                android:textSize="12sp" />
+
+                            <Button
+                                android:id="@+id/capsule"
+                                style="@style/shadow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:background="@drawable/add_med_button_normal"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:letterSpacing="0.03"
+                                android:paddingHorizontal="24dp"
+                                android:text="Capsule"
+                                android:textAppearance="@style/shadow"
+                                android:textColor="@color/light"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="13dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/shadow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:letterSpacing="0.05"
+                            android:text="Select schedule:"
+                            android:textColor="@color/dark"
+                            android:textSize="12sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="start"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/everyday"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_marginEnd="22dp"
+                                android:background="@drawable/add_med_button_normal"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:letterSpacing="0.03"
+                                android:paddingHorizontal="24dp"
+                                android:text="Everyday"
+                                android:textAppearance="@style/shadow"
+                                android:textColor="@color/light"
+                                android:textSize="12sp" />
+
+                            <Button
+                                android:id="@+id/customDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:background="@drawable/add_med_button_normal"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:letterSpacing="0.03"
+                                android:paddingHorizontal="24dp"
+                                android:text="Selected Days"
+                                android:textAppearance="@style/shadow"
+                                android:textColor="@color/light"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                 </LinearLayout>
-
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Select schedule:"
-                    android:layout_marginBottom="7dp"
-                    android:fontFamily="@font/inter_extrabold"
-                    android:textSize="15sp"
-                    android:letterSpacing="0.05"
-                    android:textColor="@color/dark"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="59dp">
-
-                    <Button
-                        android:id="@+id/button8"
-                        android:layout_width="39dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Everyday"
-                        android:textAppearance="@style/shadow"
-                        android:fontFamily="@font/inter_bold"
-                        android:textSize="12sp"
-                        android:letterSpacing="0.03"
-                        android:textColor="@color/dark"
-                        android:background="@drawable/buton"
-                        android:layout_marginEnd="22dp"/>
-
-                    <Button
-                        android:id="@+id/button9"
-                        android:layout_width="39dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Customize"
-                        android:textAppearance="@style/shadow"
-                        android:fontFamily="@font/inter_bold"
-                        android:textSize="12sp"
-                        android:letterSpacing="0.03"
-                        android:textColor="@color/dark"
-                        android:background="@drawable/buton"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-</LinearLayout>
+    <include layout="@layout/everyday_sched" />
+
+    <include layout="@layout/custom_sched"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
