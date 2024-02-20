@@ -1,29 +1,29 @@
-package com.mediteam.meditime;
+package com.mediteam.meditime.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Objects;
+import com.mediteam.meditime.Helper.RegisteredUsers;
+import com.mediteam.meditime.R;
 
 public class PinModule extends AppCompatActivity {
 
@@ -31,6 +31,8 @@ public class PinModule extends AppCompatActivity {
     pressEight, pressNine, pressBack, forgotPass, signinRed;
     EditText pin;
     TextView userGreet;
+    ProgressBar progressBar;
+    LinearLayout pinContainer;
     DatabaseReference reference;
     private FirebaseAuth mAuth;
 
@@ -56,6 +58,8 @@ public class PinModule extends AppCompatActivity {
         signinRed = findViewById(R.id.signinRedirect);
         pin = findViewById(R.id.pinText);
         userGreet = findViewById(R.id.userGreetings);
+        progressBar = findViewById(R.id.pinProgress);
+        pinContainer = findViewById(R.id.pinContainer);
 
         showUserData();
 
@@ -161,22 +165,25 @@ public class PinModule extends AppCompatActivity {
         FirebaseUser firebaseUser= mAuth.getCurrentUser();
         String userID = firebaseUser.getUid();
 
-        reference = FirebaseDatabase.getInstance().getReference("users");
+        reference = FirebaseDatabase.getInstance().getReference("RegisteredUsers");
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange (@NonNull DataSnapshot snapshot) {
-                HelperClass helperClass = snapshot.getValue(HelperClass.class);
-                if(helperClass != null){
-                    String unFromDB = helperClass.username;
+                RegisteredUsers registeredUsers = snapshot.getValue(RegisteredUsers.class);
+                if(registeredUsers != null){
+                    String unFromDB = registeredUsers.username;
 
                     String greet = "Welcome, " + unFromDB + "!";
                     userGreet.setText(greet);
+                    progressBar.setVisibility(View.GONE);
+                    pinContainer.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onCancelled (@NonNull DatabaseError error) {
                 userGreet.setText("Something went wrong. Can't find user.");
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -187,13 +194,13 @@ public class PinModule extends AppCompatActivity {
         String userPin = pin.getText().toString();
         String userID =firebaseUser.getUid();
 
-        reference = FirebaseDatabase.getInstance().getReference("users");
+        reference = FirebaseDatabase.getInstance().getReference("RegisteredUsers");
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                HelperClass helperClass = snapshot.getValue(HelperClass.class);
-                if(helperClass != null){
-                    String pinFromDB = helperClass.pin;
+                RegisteredUsers registeredUsers = snapshot.getValue(RegisteredUsers.class);
+                if(registeredUsers != null){
+                    String pinFromDB = registeredUsers.pin;
                     if (pinFromDB.equals(userPin)){
                         Intent intent = new Intent(PinModule.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK

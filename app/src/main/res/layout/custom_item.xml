@@ -3,8 +3,7 @@
     android:id="@+id/custom_item_layout"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="15dp">
+    android:layout_height="wrap_content">
 
     <EditText
         android:id="@+id/custom_day"
@@ -35,38 +34,6 @@
         android:background="@drawable/add_med_pill_bg"
         android:layout_marginHorizontal="33dp"/>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_weight="1"
-        android:background="@drawable/add_med_pill_bg"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:paddingHorizontal="3dp"
-        android:paddingVertical="3dp">
-
-        <Button
-            android:id="@+id/pill_minus"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/add_med_pill_minus" />
-
-        <TextView
-            style="@style/shadow"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/inter_bold"
-            android:gravity="center"
-            android:text="0"
-            android:textColor="@color/dark10"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/pill_plus"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/add_med_pill_plus" />
-    </LinearLayout>
+    <include layout="@layout/set_pill_quantity"/>
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.mediteam.meditime;
+package com.mediteam.meditime.Activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,7 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,9 +23,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mediteam.meditime.Helper.RegisteredUsers;
+import com.mediteam.meditime.R;
 import com.squareup.picasso.Picasso;
-
-import java.io.FileReader;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -35,6 +36,8 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference reference;
     private TextView userFN, userUN;
     private CircleImageView userDP;
+    private LinearLayout profileProgress;
+    private ProgressBar progressBar;
     private Button changeUN, changeEmail, changePass, changePin, delAcc;
 
 
@@ -56,6 +59,8 @@ public class ProfileFragment extends Fragment {
         changePass = root.findViewById(R.id.changePass);
         changePin = root.findViewById(R.id.changePin);
         delAcc = root.findViewById(R.id.DeleteAcc);
+        progressBar = root.findViewById(R.id.profileProgress);
+        profileProgress = root.findViewById(R.id.profileContainer);
 
         userDP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,14 +76,14 @@ public class ProfileFragment extends Fragment {
     public void displayUser(){
         String userID = firebaseUser.getUid();
 
-        reference = FirebaseDatabase.getInstance().getReference("users");
+        reference = FirebaseDatabase.getInstance().getReference("RegisteredUsers");
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange (@NonNull DataSnapshot snapshot) {
-                HelperClass helperClass = snapshot.getValue(HelperClass.class);
-                if(helperClass != null){
+               RegisteredUsers registeredUsers = snapshot.getValue(RegisteredUsers.class);
+                if(registeredUsers != null){
                     userFN.setText(firebaseUser.getDisplayName());
-                    String unFromDB = helperClass.username;
+                    String unFromDB = registeredUsers.username;
 
                     userUN.setText("@" + unFromDB);
                     Uri uri = firebaseUser.getPhotoUrl();
@@ -89,6 +94,10 @@ public class ProfileFragment extends Fragment {
                             .centerCrop()
                             .noFade()
                             .into(userDP);
+
+                    progressBar.setVisibility(View.GONE);
+                    profileProgress.setVisibility(View.VISIBLE);
+
                 } else {
                     Toast.makeText(getActivity(), "Something went wrong!",
                             Toast.LENGTH_SHORT).show();

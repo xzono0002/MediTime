@@ -1,4 +1,4 @@
-package com.mediteam.meditime;
+package com.mediteam.meditime.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.mediteam.meditime.R;
 
 public class GetStarted extends AppCompatActivity {
 

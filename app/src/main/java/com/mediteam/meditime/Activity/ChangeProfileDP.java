@@ -1,9 +1,8 @@
-package com.mediteam.meditime;
+package com.mediteam.meditime.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -25,6 +24,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.mediteam.meditime.R;
 import com.squareup.picasso.Picasso;
 
 public class ChangeProfileDP extends AppCompatActivity {
@@ -89,7 +89,7 @@ public class ChangeProfileDP extends AppCompatActivity {
 
     private void UploadPic () {
         if(uriImage != null){
-            StorageReference fileReference = storageReference.child(firebaseUser.getUid() + "."
+            StorageReference fileReference = storageReference.child(firebaseUser.getUid() + "/displayPic."
             + getFileExtension(uriImage));
 
             fileReference.putFile(uriImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -120,6 +120,8 @@ public class ChangeProfileDP extends AppCompatActivity {
                 public void onFailure (@NonNull Exception e) {
                     Toast.makeText(ChangeProfileDP.this, e.getMessage(),
                             Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
+                    uploadFile.setVisibility(View.VISIBLE);
                 }
             });
         } else {

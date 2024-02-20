@@ -1,4 +1,4 @@
-package com.mediteam.meditime;
+package com.mediteam.meditime.Activity;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.mediteam.meditime.R;
 
 
 public class AboutFragment extends Fragment {

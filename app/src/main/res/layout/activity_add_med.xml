@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddMed"
+    tools:context=".Activity.AddMed"
     android:background="@color/light10"
     android:orientation="vertical">
 
@@ -84,6 +84,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/add_med_error"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:letterSpacing="0.05"
+                            android:textColor="@color/error"
+                            android:textSize="11sp"
+                            android:text="@string/error_empty"
+                            android:visibility="invisible" />
 
                         <TextView
                             style="@style/shadow"

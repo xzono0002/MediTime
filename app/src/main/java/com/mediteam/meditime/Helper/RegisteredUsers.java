@@ -1,7 +1,9 @@
-package com.mediteam.meditime;
+package com.mediteam.meditime.Helper;
 
-public class HelperClass {
-    String name, username, pin;
+public class RegisteredUsers {
+    public String name;
+    public String username;
+    public String pin;
 
     public String getName() {
         return name;
@@ -27,13 +29,13 @@ public class HelperClass {
         this.pin = pin;
     }
 
-    public HelperClass(String name, String username, String pin) {
+    public RegisteredUsers (String name, String username, String pin) {
         this.name = name;
         this.username = username;
         this.pin = pin;
     }
 
-    public HelperClass () {
+    public RegisteredUsers () {
 
     }
 }

@@ -35,8 +35,10 @@
 
 
     <ScrollView
+        android:id="@+id/everyday_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -101,7 +103,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <EditText
+                    <TextView
+                        android:id="@+id/everyday_set_time"
                         android:layout_width="0dp"
                         android:layout_height="29dp"
                         android:layout_weight="1"
@@ -111,7 +114,6 @@
                         android:textSize="12sp"
                         android:textColor="@color/dark10"
                         style="@style/shadow"
-                        android:inputType="time"
                         android:background="@drawable/add_med_pill_bg"/>
 
                     <Space
@@ -119,37 +121,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"/>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/add_med_pill_bg"
-                        android:orientation="horizontal"
-                        android:gravity="center"
-                        android:paddingHorizontal="3dp"
-                        android:paddingVertical="3dp">
-
-                        <Button
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:background="@drawable/add_med_pill_minus"/>
-
-                        <TextView
-                            style="@style/shadow"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/inter_bold"
-                            android:gravity="center"
-                            android:text="0"
-                            android:textColor="@color/dark10"
-                            android:textSize="12sp" />
-
-                        <Button
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:background="@drawable/add_med_pill_plus" />
-                    </LinearLayout>
+                    <include layout="@layout/set_pill_quantity" />
                 </LinearLayout>
 
             </LinearLayout>

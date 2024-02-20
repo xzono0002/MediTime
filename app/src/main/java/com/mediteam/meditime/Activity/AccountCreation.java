@@ -1,10 +1,9 @@
-package com.mediteam.meditime;
+package com.mediteam.meditime.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -28,11 +26,10 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.mediteam.meditime.Helper.RegisteredUsers;
+import com.mediteam.meditime.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -210,10 +207,10 @@ public class AccountCreation extends AppCompatActivity {
                     UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
                     firebaseUser.updateProfile(profileChangeRequest);
 
-                    HelperClass helperClass = new HelperClass(name, username, pin);
+                    RegisteredUsers registeredUsers = new RegisteredUsers(name, username, pin);
 
-                    reference = FirebaseDatabase.getInstance().getReference("users");
-                    reference.child(firebaseUser.getUid()).setValue(helperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    reference = FirebaseDatabase.getInstance().getReference("RegisteredUsers");
+                    reference.child(firebaseUser.getUid()).setValue(registeredUsers).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete (@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
@@ -231,8 +228,11 @@ public class AccountCreation extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                             } else{
+
                                 Toast.makeText(AccountCreation.this, "Signup failed. Please try again!",
                                         Toast.LENGTH_SHORT).show();
+                                createAcc.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
                             }
                         }
                     });
