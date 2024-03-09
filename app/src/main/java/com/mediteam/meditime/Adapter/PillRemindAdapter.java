@@ -1,6 +1,7 @@
 package com.mediteam.meditime.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.mediteam.meditime.Activity.AddMed;
 import com.mediteam.meditime.Helper.MedReminder;
 import com.mediteam.meditime.R;
 
@@ -35,6 +37,14 @@ public class PillRemindAdapter extends RecyclerView.Adapter<PillRemindAdapter.vi
     public void onBindViewHolder (@NonNull PillRemindAdapter.viewholder holder, int position) {
         holder.medItem.setText(items.get(position).getMedicine());
         holder.day.setText(items.get(position).getSchedule());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+//               Intent intent = new Intent(context, AddMed.class);
+//               intent.putExtra();
+            }
+        });
     }
 
     @Override

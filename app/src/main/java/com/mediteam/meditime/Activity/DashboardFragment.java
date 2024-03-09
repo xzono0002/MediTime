@@ -86,6 +86,7 @@ public class DashboardFragment extends Fragment {
 
                     binding.dashProgress.setVisibility(View.GONE);
                 }
+                binding.dashProgress.setVisibility(View.GONE);
             }
 
             @Override

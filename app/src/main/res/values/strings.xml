@@ -42,6 +42,7 @@
     
 <!--  SPINNER  -->
     <string-array name="tube">
+        <item>-- Select Available Tube --</item>
         <item>Tube A</item>
         <item>Tube B</item>
         <item>Tube C</item>

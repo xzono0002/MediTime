@@ -2,7 +2,10 @@ package com.mediteam.meditime.Helper;
 
 public class MedReminder {
     private String Userid;
+    private String medId;
     private String medicine;
+    private String pillsOnTube;
+    private String notes;
     private String tubeSelection;
     private String pillForm;
     private String schedule;
@@ -23,6 +26,30 @@ public class MedReminder {
 
     public void setUserid (String userid) {
         Userid = userid;
+    }
+
+    public String getMedId () {
+        return medId;
+    }
+
+    public void setMedId (String medId) {
+        this.medId = medId;
+    }
+
+    public String getPillsOnTube () {
+        return pillsOnTube;
+    }
+
+    public void setPillsOnTube (String pillsOnTube) {
+        this.pillsOnTube = pillsOnTube;
+    }
+
+    public String getNotes () {
+        return notes;
+    }
+
+    public void setNotes (String notes) {
+        this.notes = notes;
     }
 
     public String getMedicine () {

@@ -104,43 +104,6 @@
                         android:textColor="@color/light"
                         android:textSize="12sp" />
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/custom_day"
-                        android:layout_width="0dp"
-                        android:layout_height="29dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="MON"
-                        android:fontFamily="@font/inter_bold"
-                        android:textSize="12sp"
-                        android:textColor="@color/dark10"
-                        style="@style/shadow"
-                        android:inputType="date"
-                        android:background="@drawable/add_med_pill_bg"/>
-
-                    <TextView
-                        android:id="@+id/custom_time"
-                        android:layout_width="0dp"
-                        android:layout_height="29dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="10:00 AM"
-                        android:fontFamily="@font/inter_bold"
-                        android:textSize="12sp"
-                        android:textColor="@color/dark10"
-                        style="@style/shadow"
-                        android:background="@drawable/add_med_pill_bg"
-                        android:layout_marginHorizontal="33dp"/>
-
-                    <include layout="@layout/set_pill_quantity"/>
-
-                </LinearLayout>
             </LinearLayout>
 
             <Button

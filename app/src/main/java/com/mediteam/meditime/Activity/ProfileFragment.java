@@ -95,14 +95,13 @@ public class ProfileFragment extends Fragment {
                             .noFade()
                             .into(userDP);
 
-                    progressBar.setVisibility(View.GONE);
-                    profileProgress.setVisibility(View.VISIBLE);
-
                 } else {
                     Toast.makeText(getActivity(), "Something went wrong!",
                             Toast.LENGTH_SHORT).show();
                 }
                 //stop progress bar
+                progressBar.setVisibility(View.GONE);
+                profileProgress.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -110,6 +109,8 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getActivity(), "Something went wrong!",
                         Toast.LENGTH_SHORT).show();
                 //stop progress bar
+                progressBar.setVisibility(View.GONE);
+                profileProgress.setVisibility(View.VISIBLE);
             }
         });
     }

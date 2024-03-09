@@ -213,8 +213,9 @@
 
                             <Button
                                 android:id="@+id/oneBTN"
-                                android:layout_width="55dp"
+                                android:layout_width="0dp"
                                 android:layout_height="55dp"
+                                android:layout_weight="1"
                                 android:background="@drawable/circle_btn"
                                 android:fontFamily="@font/inter_extrabold"
                                 android:onClick="clickOne"
@@ -224,9 +225,10 @@
 
                             <Button
                                 android:id="@+id/twoBTN"
-                                android:layout_width="55dp"
+                                android:layout_width="0dp"
                                 android:layout_height="55dp"
                                 android:layout_marginHorizontal="40dp"
+                                android:layout_weight="1"
                                 android:background="@drawable/circle_btn"
                                 android:fontFamily="@font/inter_extrabold"
                                 android:onClick="clickTwo"
@@ -236,8 +238,9 @@
 
                             <Button
                                 android:id="@+id/threeBTN"
-                                android:layout_width="55dp"
+                                android:layout_width="0dp"
                                 android:layout_height="55dp"
+                                android:layout_weight="1"
                                 android:background="@drawable/circle_btn"
                                 android:fontFamily="@font/inter_extrabold"
                                 android:onClick="clickThree"
@@ -254,8 +257,9 @@
 
                             <Button
                                 android:id="@+id/fourBTN"
-                                android:layout_width="55dp"
+                                android:layout_width="0dp"
                                 android:layout_height="55dp"
+                                android:layout_weight="1"
                                 android:background="@drawable/circle_btn"
                                 android:fontFamily="@font/inter_extrabold"
                                 android:onClick="clickFour"
@@ -265,8 +269,9 @@
 
                             <Button
                                 android:id="@+id/fiveBTN"
-                                android:layout_width="55dp"
+                                android:layout_width="0dp"
                                 android:layout_height="55dp"
+                                android:layout_weight="1"
                                 android:layout_marginHorizontal="40dp"
                                 android:background="@drawable/circle_btn"
                                 android:fontFamily="@font/inter_extrabold"
@@ -277,8 +282,9 @@
 
                             <Button
                                 android:id="@+id/sixBTN"
-                                android:layout_width="55dp"
+                                android:layout_width="0dp"
                                 android:layout_height="55dp"
+                                android:layout_weight="1"
                                 android:background="@drawable/circle_btn"
                                 android:fontFamily="@font/inter_extrabold"
                                 android:onClick="clickSix"
@@ -294,8 +300,9 @@
 
                             <Button
                                 android:id="@+id/sevenBTN"
-                                android:layout_width="55dp"
+                                android:layout_width="0dp"
                                 android:layout_height="55dp"
+                                android:layout_weight="1"
                                 android:background="@drawable/circle_btn"
                                 android:fontFamily="@font/inter_extrabold"
                                 android:onClick="clickSeven"
@@ -305,8 +312,9 @@
 
                             <Button
                                 android:id="@+id/eightBTN"
-                                android:layout_width="55dp"
+                                android:layout_width="0dp"
                                 android:layout_height="55dp"
+                                android:layout_weight="1"
                                 android:layout_marginHorizontal="40dp"
                                 android:background="@drawable/circle_btn"
                                 android:fontFamily="@font/inter_extrabold"
@@ -317,8 +325,9 @@
 
                             <Button
                                 android:id="@+id/nineBTN"
-                                android:layout_width="55dp"
+                                android:layout_width="0dp"
                                 android:layout_height="55dp"
+                                android:layout_weight="1"
                                 android:background="@drawable/circle_btn"
                                 android:fontFamily="@font/inter_extrabold"
                                 android:onClick="clickNine"
@@ -335,13 +344,15 @@
                             android:orientation="vertical">
 
                             <Space
-                                android:layout_width="55dp"
-                                android:layout_height="55dp" />
+                                android:layout_width="0dp"
+                                android:layout_height="55dp"
+                                android:layout_weight="1"/>
 
                             <Button
                                 android:id="@+id/zeroBTN"
-                                android:layout_width="55dp"
+                                android:layout_width="0dp"
                                 android:layout_height="55dp"
+                                android:layout_weight="1"
                                 android:layout_marginHorizontal="40dp"
                                 android:background="@drawable/circle_btn"
                                 android:fontFamily="@font/inter_extrabold"
@@ -352,8 +363,9 @@
 
                             <Button
                                 android:id="@+id/bckSpace"
-                                android:layout_width="55dp"
-                                android:layout_height="32dp"
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_weight="1"
                                 android:background="@drawable/backspace_outline"
                                 android:onClick="bckSpace"
                                 android:visibility="invisible" />
@@ -366,6 +378,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="19dp"
+                        android:layout_marginBottom="30dp"
                         android:gravity="center"
                         android:orientation="vertical">
 
