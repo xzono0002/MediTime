@@ -67,7 +67,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="7dp"
-                    android:alpha="0.67"
                     android:background="@drawable/medi_container"
                     android:minHeight="250dp"
                     android:orientation="vertical"
@@ -91,24 +90,20 @@
                         android:layout_height="match_parent"
                         android:layout_marginVertical="20dp" />
 
-
                 </LinearLayout>
 
-                <Button
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/addMedic"
                     style="@style/shadow"
-                    android:layout_width="172dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:background="@drawable/buton"
-                    android:fontFamily="@font/inter_extrabold"
-                    android:letterSpacing=".15"
-                    android:text="Add Medication"
-                    android:textColor="@color/dark10"
-                    android:textSize="12sp" />
+                    android:layout_gravity="bottom|end"
+                    android:backgroundTint="@color/base"
+                    app:srcCompat="@drawable/add_white"
+                    android:layout_marginVertical="30dp" />
             </LinearLayout>
-        </ScrollView>
 
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

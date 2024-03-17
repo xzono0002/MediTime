@@ -7,6 +7,7 @@
     <color name="dark20">#00748C</color>
     <color name="dark10">#023D49</color>
     <color name="dark">#00181C</color>
+    <color name="container">#419FB2</color>
 
     <color name="shadow">#4000181C</color>
     <color name="error">#E44A4A</color>

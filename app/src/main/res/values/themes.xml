@@ -14,7 +14,7 @@
     <style name="text_style">
         <item name="fontFamily">@font/montserrat_bold</item>
         <item name="android:textColor">@color/dark10</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:letterSpacing">0.05</item>
     </style>
 

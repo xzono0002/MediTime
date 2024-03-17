@@ -3,8 +3,12 @@ package com.mediteam.meditime.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,11 +34,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mediteam.meditime.Helper.AlarmReceiver;
 import com.mediteam.meditime.Helper.MedReminder;
+import com.mediteam.meditime.Helper.ScheduleItem;
 import com.mediteam.meditime.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -43,16 +50,17 @@ public class AddMed extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
     private DatabaseReference databaseReference;
-    private TextView everydaySetTime, customSetTime, errorText;
-    private EditText mediName, everydayPill, customPill, pillOnTube, etNote;
+    private TextView errorText;
+    private EditText mediName, pillOnTube, etNote;
     private ImageButton bckHome, saveMedi;
     private Button tabletBtn, capsuleBtn, everydayBtn, customDateBtn, addPill, minusPill;
     private Spinner selectTube;
-    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapter, adapterDays;
     ArrayList<String> assignedTubes = new ArrayList<>();
-    private String tubeSelected, dosForm, schedule;
+    private String tubeSelected, dosForm, schedule, day, time, key;
+    private int pills;
     private boolean tabletSelected = false, capsuleSelected = false, everydaySelected = false, customSelected = false;
-    private int pillQuantity;
+    MedReminder medReminder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +79,6 @@ public class AddMed extends AppCompatActivity {
         capsuleBtn = findViewById(R.id.capsule);
         everydayBtn = findViewById(R.id.everyday);
         customDateBtn =findViewById(R.id.customDate);
-        customSetTime = findViewById(R.id.custom_time);
         errorText = findViewById(R.id.add_med_error);
 
         selectTube = findViewById(R.id.tubeSelect);
@@ -133,8 +140,8 @@ public class AddMed extends AppCompatActivity {
         String[] updatedTubesArray = updatedTubeList.toArray(new String[0]);
 
         //setup adapter for the spinner view
-        adapter = new ArrayAdapter<>(AddMed.this, R.layout.selected_spinner_item, updatedTubesArray);
-        adapter.setDropDownViewResource(R.layout.spinner_list);
+        adapter = new ArrayAdapter<>(AddMed.this, R.layout.selected_spinner_tube, updatedTubesArray);
+        adapter.setDropDownViewResource(R.layout.spinner_list_tube);
 
         selectTube.setAdapter(adapter);
     }
@@ -217,25 +224,98 @@ public class AddMed extends AppCompatActivity {
     }
 
     private void saveMedSchedule () {
+
+        String userID = firebaseUser.getUid();
         String medTitle = mediName.getText().toString();
         String pillsOntube = pillOnTube.getText().toString();
         String notes = etNote.getText().toString();
-        MedReminder medReminder = new MedReminder();
+
+        medReminder = new MedReminder();
         medReminder.setMedicine(medTitle);
         medReminder.setTubeSelection(tubeSelected);
         medReminder.setPillForm(dosForm);
-        medReminder.setSchedule(schedule);
-        medReminder.setUserid(firebaseUser.getUid());
+        medReminder.setRepeat(schedule);
+        medReminder.setUserid(userID);
         medReminder.setPillsOnTube(pillsOntube);
         medReminder.setNotes(notes);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("MedRemind");
-        String key = databaseReference.child("MedReminder").push().getKey();
-        
+        key = databaseReference.child("MedReminder").push().getKey();
+        medReminder.setMedId(key);
+
         databaseReference.child(key).setValue(medReminder).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete (@NonNull Task<Void> task) {
-                medReminder.setMedId(key);
+
+                // If everyday is selected, get everyday items
+                if(everydaySelected){
+                    LinearLayout everydayTable = findViewById(R.id.everyday_table);
+                    for (int i = 1; i < everydayTable.getChildCount(); i++){
+                        String everydayKey = databaseReference.child(key).child("everyday").push().getKey();
+
+                        View view = everydayTable.getChildAt(i);
+                        time = ((TextView) view.findViewById(R.id.everyday_time)).getText().toString();
+                        pills = Integer.parseInt(((EditText) view.findViewById(R.id.everydayPill)).getText().toString());
+
+                        databaseReference.child(key).child("schedule").child(everydayKey).child("days").setValue(" ");
+                        databaseReference.child(key).child("schedule").child(everydayKey).child("times").setValue(time);
+                        databaseReference.child(key).child("schedule").child(everydayKey).child("pillQuantities").setValue(pills);
+
+                        //Extract the AM/PM from the time string
+                        String[] parts = time.split(" ");
+                        String[] timeParts = parts[0].split(":"); // Extract hours and minutes from the time string
+
+                        int hour = Integer.parseInt(timeParts[0]);
+                        int minute = Integer.parseInt(timeParts[1]);
+
+                        // Convert hour to 24-hour format if necessary
+                        if (parts[1].equals("PM")) {
+                            hour = (hour == 12) ? 12 : hour + 12; // Add 12 to hour if it's PM, but keep 12 PM as it is
+                        } else {
+                            hour = (hour == 12) ? 0 : hour; // If it's AM and hour is 12, set hour to 0, otherwise keep hour as it is
+                        }
+
+                        ScheduleItem scheduleItem = new ScheduleItem();
+                        scheduleItem.setDay(" ");
+                        scheduleItem.setTime(time);
+                        scheduleItem.setPillQuantities(pills);
+
+                        setAlarm(hour, minute, key, everydayKey);
+
+                    }
+                }
+
+                // If custom day is selected, get custom items
+                else if(customSelected) {
+                    LinearLayout customTable = findViewById(R.id.custom_table);
+                    for (int i = 1; i < customTable.getChildCount(); i++){
+                        String customKey = databaseReference.child(key).child("custom").push().getKey();
+
+                        View view = customTable.getChildAt(i);
+                        day = ((Spinner) view.findViewById(R.id.custom_day)).getSelectedItem().toString();
+                        time = ((TextView) view.findViewById(R.id.custom_time)).getText().toString();
+                        pills = Integer.parseInt(((EditText) view.findViewById(R.id.customPill)).getText().toString());
+
+                        databaseReference.child(key).child("schedule").child(customKey).child("days").setValue(day);
+                        databaseReference.child(key).child("schedule").child(customKey).child("times").setValue(time);
+                        databaseReference.child(key).child("schedule").child(customKey).child("pillQuantities").setValue(pills);
+
+                        // Extract hours and minutes from the time string
+                        String[] parts = time.split(" ");
+                        String[] timeParts = parts[0].split(":");
+
+                        int hour = Integer.parseInt(timeParts[0]);
+                        int minute = Integer.parseInt(timeParts[1]);
+
+                        ScheduleItem scheduleItem = new ScheduleItem();
+                        scheduleItem.setDay(day);
+                        scheduleItem.setTime(time);
+                        scheduleItem.setPillQuantities(pills);
+
+                        setAlarm(hour, minute, key, customKey);
+                    }
+                }
+
                 Toast.makeText(AddMed.this, "Med Reminder added successfully",
                         Toast.LENGTH_SHORT).show();
 
@@ -246,6 +326,25 @@ public class AddMed extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+   private void setAlarm(int hours, int minutes, String reminderKey, String childKey){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        intent.putExtra("reminderKey", reminderKey);
+        intent.putExtra("childKey", childKey);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hours);
+        calendar.set(Calendar.MINUTE, minutes);
+        calendar.set(Calendar.SECOND, 0);
+
+        if(calendar.getTimeInMillis() <= System.currentTimeMillis()){
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     private void innitMiscellaneous () {
@@ -266,7 +365,12 @@ public class AddMed extends AppCompatActivity {
                         bottomSheetBehavior_custom.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     }
                     bottomSheetBehavior_everyday.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    addNewEverydayItem();
+
+                    LinearLayout everydayTable = findViewById(R.id.everyday_table);
+                    if (everydayTable.getChildCount() == 1){
+                        addNewEverydayItem();
+                    }
+
                 } else {
                     bottomSheetBehavior_everyday.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 }
@@ -282,7 +386,7 @@ public class AddMed extends AppCompatActivity {
                 customDateBtn.setBackgroundResource(R.drawable.add_med_button_normal);
                 everydaySelected = true;
                 customSelected = false;
-                schedule = everydayBtn.getText().toString();
+                schedule = "Everyday";
 
                 bottomSheetBehavior_everyday.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
@@ -298,8 +402,6 @@ public class AddMed extends AppCompatActivity {
 
 
         //custom sched events
-
-        //open
         customDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
@@ -308,7 +410,12 @@ public class AddMed extends AppCompatActivity {
                         bottomSheetBehavior_everyday.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     }
                     bottomSheetBehavior_custom.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    addNewCustomItem();
+
+                    LinearLayout customTable = findViewById(R.id.custom_table);
+                    if (customTable.getChildCount() == 1){
+                        addNewCustomItem();
+                    }
+
                 } else {
                     bottomSheetBehavior_custom.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 }
@@ -324,7 +431,7 @@ public class AddMed extends AppCompatActivity {
                 everydayBtn.setBackgroundResource(R.drawable.add_med_button_normal);
                 customSelected = true;
                 everydaySelected = false;
-                schedule = customDateBtn.getText().toString();
+                schedule = "Custom";
 
                 bottomSheetBehavior_custom.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
@@ -349,9 +456,8 @@ public class AddMed extends AppCompatActivity {
         layoutParams.setMargins(0, 15, 0, 0);
         everydayTable.addView(newEverydayRow, layoutParams);
 
-
         // Set click listener for the TextView to open the TimePickerDialog
-        everydaySetTime = newEverydayRow.findViewById(R.id.everyday_time);
+        TextView everydaySetTime = newEverydayRow.findViewById(R.id.everyday_time);
         everydaySetTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -369,6 +475,7 @@ public class AddMed extends AppCompatActivity {
                             hours = hours - 12;
                         }
                         everydaySetTime.setText(String.format(Locale.getDefault(), "%02d:%02d %s", hours, minutes, ampm));
+
                     }
                 }, 12, 00, false);
 
@@ -381,8 +488,8 @@ public class AddMed extends AppCompatActivity {
         addPill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                everydayPill = newEverydayRow.findViewById(R.id.everydayPill);
-                pillQuantity = Integer.parseInt(everydayPill.getText().toString());
+                EditText everydayPill = newEverydayRow.findViewById(R.id.everydayPill);
+                int pillQuantity = Integer.parseInt(everydayPill.getText().toString());
                 pillQuantity++;
                 everydayPill.setText(String.valueOf(pillQuantity));
             }
@@ -393,8 +500,8 @@ public class AddMed extends AppCompatActivity {
         minusPill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                everydayPill = newEverydayRow.findViewById(R.id.everydayPill);
-                pillQuantity = Integer.parseInt(everydayPill.getText().toString());
+                EditText everydayPill = newEverydayRow.findViewById(R.id.everydayPill);
+                int pillQuantity = Integer.parseInt(everydayPill.getText().toString());
                 pillQuantity--;
                 everydayPill.setText(String.valueOf(pillQuantity));
             }
@@ -419,9 +526,27 @@ public class AddMed extends AppCompatActivity {
         layoutParams.setMargins(0, 15, 0, 0);
         customTable.addView(newCustomRow, layoutParams);
 
+        // Setup adapter for the spinner view
+        Spinner daySpinner = newCustomRow.findViewById(R.id.custom_day);
+        adapterDays = new ArrayAdapter<>(AddMed.this, R.layout.selected_spinner_days, getResources().getStringArray(R.array.days));
+        adapterDays.setDropDownViewResource(R.layout.spinner_list_days);
+        daySpinner.setAdapter(adapterDays);
+
+        // Set click listener for the TextView to handle handle selected items
+        daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected (AdapterView<?> parent, View view, int pos, long l) {
+//                tubeSelected = parent.getItemAtPosition(pos).toString();
+            }
+
+            @Override
+            public void onNothingSelected (AdapterView<?> adapterView) {
+
+            }
+        });
 
         // Set click listener for the TextView to open the TimePickerDialog
-        customSetTime = newCustomRow.findViewById(R.id.custom_time);
+        TextView customSetTime = newCustomRow.findViewById(R.id.custom_time);
         customSetTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -451,8 +576,8 @@ public class AddMed extends AppCompatActivity {
         addPill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                customPill = newCustomRow.findViewById(R.id.customPill);
-                pillQuantity = Integer.parseInt(customPill.getText().toString());
+                EditText customPill = newCustomRow.findViewById(R.id.customPill);
+                int pillQuantity = Integer.parseInt(customPill.getText().toString());
                 pillQuantity++;
                 customPill.setText(String.valueOf(pillQuantity));
             }
@@ -463,8 +588,8 @@ public class AddMed extends AppCompatActivity {
         minusPill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                customPill = newCustomRow.findViewById(R.id.customPill);
-                pillQuantity = Integer.parseInt(customPill.getText().toString());
+                EditText customPill = newCustomRow.findViewById(R.id.customPill);
+                int pillQuantity = Integer.parseInt(customPill.getText().toString());
                 pillQuantity--;
                 customPill.setText(String.valueOf(pillQuantity));
             }
@@ -477,26 +602,5 @@ public class AddMed extends AppCompatActivity {
                 scrollView.fullScroll(View.FOCUS_DOWN);
             }
         });
-    }
-
-    private void openCustomDialog(){
-        TimePickerDialog timePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet (TimePicker timePicker, int hours, int minutes) {
-                String ampm;
-                if (hours < 12) {
-                    ampm = "AM";
-                    if (hours == 0) {
-                        hours = 12;  // midnight
-                    }
-                } else {
-                    ampm = "PM";
-                    hours = hours - 12;
-                }
-                customSetTime.setText(String.format(Locale.getDefault(), "%02d:%02d %s", hours, minutes, ampm));
-            }
-        }, 12, 00, false);
-
-        timePicker.show();
     }
 }

@@ -1,6 +1,11 @@
 package com.mediteam.meditime.Helper;
 
-public class MedReminder {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class MedReminder implements Serializable {
     private String Userid;
     private String medId;
     private String medicine;
@@ -8,9 +13,8 @@ public class MedReminder {
     private String notes;
     private String tubeSelection;
     private String pillForm;
-    private String schedule;
-    private String day;
-    private int time;
+    private String repeat;
+    private Map<String, ScheduleItem> schedule;
 
     public MedReminder () {
     }
@@ -76,27 +80,14 @@ public class MedReminder {
         this.pillForm = pillForm;
     }
 
-    public String getSchedule () {
-        return schedule;
+    public String getRepeat () {
+        return repeat;
     }
 
-    public void setSchedule (String schedule) {
-        this.schedule = schedule;
+    public void setRepeat (String repeat) {
+        this.repeat = repeat;
     }
 
-    public String getDay () {
-        return day;
-    }
-
-    public void setDay (String day) {
-        this.day = day;
-    }
-
-    public int getTime () {
-        return time;
-    }
-
-    public void setTime (int time) {
-        this.time = time;
-    }
 }
+
+

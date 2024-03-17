@@ -58,26 +58,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()){
             case R.id.nav_medication:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
-                profile.setBackgroundResource(R.drawable.profile);
-                terms.setBackgroundResource(R.drawable.detail);
+                profile.setBackgroundResource(R.drawable.account_filled);
+                terms.setBackgroundResource(R.drawable.help_filled);
                 break;
 
             case R.id.nav_about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment()).commit();
-                profile.setBackgroundResource(R.drawable.profile);
-                terms.setBackgroundResource(R.drawable.detail);
+                profile.setBackgroundResource(R.drawable.account_filled);
+                terms.setBackgroundResource(R.drawable.help_filled);
                 break;
 
             case R.id.nav_privacy:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PrivacyFragment()).commit();
-                profile.setBackgroundResource(R.drawable.profile);
-                terms.setBackgroundResource(R.drawable.detail);
+                profile.setBackgroundResource(R.drawable.account_filled);
+                terms.setBackgroundResource(R.drawable.help_filled);
                 break;
 
             case R.id.nav_contact:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ContactFragment()).commit();
-                profile.setBackgroundResource(R.drawable.profile);
-                terms.setBackgroundResource(R.drawable.detail);
+                profile.setBackgroundResource(R.drawable.account_filled);
+                terms.setBackgroundResource(R.drawable.help_filled);
                 break;
 
             case R.id.nav_logout:
@@ -106,13 +106,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void profile(View view){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
-            profile.setBackgroundResource(R.drawable.profile_click);
-            terms.setBackgroundResource(R.drawable.detail);
+            profile.setBackgroundResource(R.drawable.account_outline);
+            terms.setBackgroundResource(R.drawable.help_filled);
     }
 
     public void details(View view){
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PrivacyFragment()).commit();
-        terms.setBackgroundResource(R.drawable.detail_click);
-        profile.setBackgroundResource(R.drawable.profile);
+        terms.setBackgroundResource(R.drawable.help_outline);
+        profile.setBackgroundResource(R.drawable.account_filled);
     }
 }

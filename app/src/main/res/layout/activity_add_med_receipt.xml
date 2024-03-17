@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.AddMedReceipt"
+    android:background="@color/light10">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/toolbar"
+                android:paddingHorizontal="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:id="@+id/backHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/back_ios"
+                        android:background="@color/transparent" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"/>
+                    <ImageButton
+                        android:id="@+id/saveMedi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/check_circle"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/transparent"/>
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Complete Details"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/dark10"
+                    android:layout_marginTop="63dp"
+                    style="@style/shadow"/>
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginVertical="48dp"
+                    android:paddingHorizontal="18dp"
+                    android:paddingTop="40dp"
+                    android:paddingBottom="20dp"
+                    android:background="@drawable/receipt_bg">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="REFILLED PILLS"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/light"
+                            android:letterSpacing="0.05"
+                            style="@style/shadow"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="TUBE"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/light"
+                            android:letterSpacing="0.05"
+                            style="@style/shadow"
+                            android:layout_marginVertical="18dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="DOSAGE FORM"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/light"
+                            android:letterSpacing="0.05"
+                            style="@style/shadow"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="SCHEDULE"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/light"
+                            android:letterSpacing="0.05"
+                            style="@style/shadow"
+                            android:layout_marginVertical="18dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="TYPE OF STORAGE"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/light"
+                            android:letterSpacing="0.05"
+                            style="@style/shadow"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="40dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="2"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/light"
+                            android:letterSpacing="0.05"
+                            style="@style/shadow"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="B"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/light"
+                            android:letterSpacing="0.05"
+                            style="@style/shadow"
+                            android:layout_marginVertical="18dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="TABLET"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/light"
+                            android:letterSpacing="0.05"
+                            style="@style/shadow"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="EVERYDAY"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/light"
+                            android:letterSpacing="0.05"
+                            style="@style/shadow"
+                            android:layout_marginVertical="18dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="INSIDE MEDITIME"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/light"
+                            android:letterSpacing="0.05"
+                            style="@style/shadow"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="18dp"
+                    android:paddingTop="40dp"
+                    android:paddingBottom="20dp"
+                    android:background="@drawable/receipt_bg">
+
+                    <LinearLayout
+                        android:id="@+id/everyday_table"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="TIME INTAKE"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="12sp"
+                                android:textColor="@color/light"
+                                android:letterSpacing="0.05"
+                                style="@style/shadow"/>
+
+                            <TextView
+                                style="@style/shadow"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="40dp"
+                                android:fontFamily="@font/inter_bold"
+                                android:letterSpacing="0.05"
+                                android:text="NUMBER OF PILLS"
+                                android:textAllCaps="true"
+                                android:textColor="@color/light"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,34 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <EditText
+    <Spinner
         android:id="@+id/custom_day"
         android:layout_width="0dp"
         android:layout_height="29dp"
         android:layout_weight="1"
+        android:background="@drawable/add_med_pill_bg"
         android:gravity="center"
-        android:text="MON"
-        android:fontFamily="@font/inter_bold"
-        android:textSize="12sp"
-        android:textColor="@color/dark10"
-        style="@style/shadow"
-        android:inputType="date"
-        android:background="@drawable/add_med_pill_bg"/>
+        android:layout_gravity="center"
+        android:textAlignment="center" />
 
-    <EditText
+    <TextView
         android:id="@+id/custom_time"
+        style="@style/shadow"
         android:layout_width="0dp"
         android:layout_height="29dp"
+        android:layout_marginHorizontal="33dp"
         android:layout_weight="1"
-        android:gravity="center"
-        android:text="10:00 AM"
-        android:fontFamily="@font/inter_bold"
-        android:textSize="12sp"
-        android:textColor="@color/dark10"
-        style="@style/shadow"
-        android:inputType="time"
         android:background="@drawable/add_med_pill_bg"
-        android:layout_marginHorizontal="33dp"/>
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="10:00 AM"
+        android:textColor="@color/dark10"
+        android:textSize="12sp" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -41,12 +37,13 @@
         android:background="@drawable/add_med_pill_bg"
         android:orientation="horizontal"
         android:gravity="center"
+        android:layout_gravity="center"
         android:paddingHorizontal="3dp"
         android:paddingVertical="3dp">
 
         <Button
             android:id="@+id/custom_pill_minus"
-            android:layout_width="24dp"
+            android:layout_width="21dp"
             android:layout_height="24dp"
             android:background="@drawable/add_med_pill_minus" />
 

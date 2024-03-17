@@ -8,7 +8,8 @@
     tools:context=".Activity.MainActivity"
     android:background="@color/light10"
     android:fitsSystemWindows="true"
-    android:id="@+id/drawer_layout">
+    android:id="@+id/drawer_layout"
+    tools:openDrawer="start">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,12 +40,11 @@
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:paddingHorizontal="24dp"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu"
         app:itemIconTint="@color/dark10"
-        app:itemIconSize="26dp"
+        app:itemIconSize="20dp"
         app:subheaderTextAppearance="@style/subheader_style"
         app:itemTextAppearance="@style/text_style"
         android:background="@drawable/nav_bg" />

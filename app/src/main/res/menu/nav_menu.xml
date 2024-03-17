@@ -17,7 +17,7 @@
             <menu>
                 <item
                     android:id="@+id/nav_about"
-                    android:icon="@drawable/about_dev"
+                    android:icon="@drawable/about"
                     android:title="About Developers" />
                 <item
                     android:id="@+id/nav_privacy"

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/custom_item_layout"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp">
+
+    <TextView
+        android:id="@+id/receipt_custom_day"
+        style="@style/shadow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:layout_weight="1"
+        android:text="THUR"
+        android:gravity="center"
+        android:textColor="@color/light"
+        android:textSize="12sp"
+        android:background="@color/transparent" />
+
+    <TextView
+        android:id="@+id/receipt_custom_time"
+        android:layout_width="wrap_content"
+        android:layout_height="29dp"
+        android:gravity="center"
+        android:layout_marginHorizontal="20dp"
+        android:paddingHorizontal="14dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="10:00 AM"
+        android:textSize="12sp"
+        android:textColor="@color/dark10"
+        style="@style/shadow"
+        android:background="@drawable/add_med_pill_bg"/>
+
+    <TextView
+        android:id="@+id/receipt_custom_pill"
+        style="@style/shadow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="2"
+        android:textColor="@color/light"
+        android:textSize="12sp"
+        android:background="@color/transparent" />
+
+</LinearLayout>

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,7 +38,7 @@ public class DashboardFragment extends Fragment {
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
     private TextView userGreet;
-    private Button addMed;
+    private FloatingActionButton addMed;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,7 +76,8 @@ public class DashboardFragment extends Fragment {
             public void onDataChange (@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     for (DataSnapshot issue : snapshot.getChildren()){
-                        list.add(issue.getValue(MedReminder.class));
+                        MedReminder medReminder = issue.getValue(MedReminder.class);
+                        list.add(medReminder);
                     }
 
                     if (list.size() > 0){
