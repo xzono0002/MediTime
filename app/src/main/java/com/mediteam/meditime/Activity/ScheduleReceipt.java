@@ -59,7 +59,6 @@ public class ScheduleReceipt extends AppCompatActivity {
             public void onDataChange (@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     ArrayList<ScheduleItem> list = new ArrayList<>();
-                    ArrayList<MedReminder> list2 = new ArrayList<>();
 
                     for (DataSnapshot childSnapshot : snapshot.child("schedule").getChildren()) {
                         String days = childSnapshot.child("days").getValue(String.class);
@@ -80,7 +79,6 @@ public class ScheduleReceipt extends AppCompatActivity {
 
                     // Extract data for MedReminder
                     String repeat = snapshot.child("repeat").getValue(String.class);
-                    String medID = snapshot.child("medId").getValue(String.class);
 
                     // Add MedReminder to list2
                     MedReminder medReminder = new MedReminder();
@@ -132,7 +130,7 @@ public class ScheduleReceipt extends AppCompatActivity {
         binding.editMedi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                Intent intent = new Intent(ScheduleReceipt.this, AddMed.class);
+                Intent intent = new Intent(ScheduleReceipt.this, EditMed.class);
                 startActivity(intent);
             }
         });

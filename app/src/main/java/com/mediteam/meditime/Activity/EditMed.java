@@ -8,7 +8,6 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,7 +44,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class AddMed extends AppCompatActivity {
+public class EditMed extends AppCompatActivity {
+
 
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
@@ -63,9 +63,9 @@ public class AddMed extends AppCompatActivity {
     MedReminder medReminder;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_med);
+        setContentView(R.layout.activity_edit_med);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
@@ -87,24 +87,24 @@ public class AddMed extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange (@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists()){
-                        for (DataSnapshot requestSnapshot : snapshot.getChildren()) {
+                if(snapshot.exists()){
+                    for (DataSnapshot requestSnapshot : snapshot.getChildren()) {
 
-                            // Check if the user ID matches the current user's ID
-                            String userID = requestSnapshot.child("userid").getValue(String.class);
-                            if (userID != null && userID.equals(firebaseUser.getUid())) {
-                                // The userID matches the current user, proceed with processing the tube data
-                                String tube = requestSnapshot.child("tubeSelection").getValue(String.class); // Get the tube name
-                                if (tube != null) {
-                                    assignedTubes.add(tube);
-                                }
+                        // Check if the user ID matches the current user's ID
+                        String userID = requestSnapshot.child("userid").getValue(String.class);
+                        if (userID != null && userID.equals(firebaseUser.getUid())) {
+                            // The userID matches the current user, proceed with processing the tube data
+                            String tube = requestSnapshot.child("tubeSelection").getValue(String.class); // Get the tube name
+                            if (tube != null) {
+                                assignedTubes.add(tube);
                             }
                         }
-                        updateAdapter();
-                    } else {
-                        //if MedRemind has no value
-                        updateAdapter();
                     }
+                    updateAdapter();
+                } else {
+                    //if MedRemind has no value
+                    updateAdapter();
+                }
             }
 
             @Override
@@ -119,7 +119,7 @@ public class AddMed extends AppCompatActivity {
                 if(!validateFields()){
 
                 } else{
-                    saveMedSchedule();
+                    updateMedSchedule();
                 }
             }
         });
@@ -140,7 +140,7 @@ public class AddMed extends AppCompatActivity {
         String[] updatedTubesArray = updatedTubeList.toArray(new String[0]);
 
         //setup adapter for the spinner view
-        adapter = new ArrayAdapter<>(AddMed.this, R.layout.selected_spinner_tube, updatedTubesArray);
+        adapter = new ArrayAdapter<>(EditMed.this, R.layout.selected_spinner_tube, updatedTubesArray);
         adapter.setDropDownViewResource(R.layout.spinner_list_tube);
 
         selectTube.setAdapter(adapter);
@@ -175,9 +175,9 @@ public class AddMed extends AppCompatActivity {
             @Override
             public void onClick (View view) {
                 tabletBtn.setBackgroundResource(R.drawable.add_med_button_onclick);
-                tabletBtn.setTextColor(AddMed.this.getResources().getColor(R.color.dark10));
+                tabletBtn.setTextColor(EditMed.this.getResources().getColor(R.color.dark10));
                 capsuleBtn.setBackgroundResource(R.drawable.add_med_button_normal);
-                capsuleBtn.setTextColor(AddMed.this.getResources().getColor(R.color.light));
+                capsuleBtn.setTextColor(EditMed.this.getResources().getColor(R.color.light));
                 tabletSelected = true;
                 capsuleSelected = false;
                 dosForm = tabletBtn.getText().toString();
@@ -189,9 +189,9 @@ public class AddMed extends AppCompatActivity {
             @Override
             public void onClick (View view) {
                 capsuleBtn.setBackgroundResource(R.drawable.add_med_button_onclick);
-                capsuleBtn.setTextColor(AddMed.this.getResources().getColor(R.color.dark10));
+                capsuleBtn.setTextColor(EditMed.this.getResources().getColor(R.color.dark10));
                 tabletBtn.setBackgroundResource(R.drawable.add_med_button_normal);
-                tabletBtn.setTextColor(AddMed.this.getResources().getColor(R.color.light));
+                tabletBtn.setTextColor(EditMed.this.getResources().getColor(R.color.light));
                 capsuleSelected = true;
                 tabletSelected = false;
                 dosForm = capsuleBtn.getText().toString();
@@ -223,7 +223,7 @@ public class AddMed extends AppCompatActivity {
         } else return true;
     }
 
-    private void saveMedSchedule () {
+    private void updateMedSchedule () {
 
         String userID = firebaseUser.getUid();
         String medTitle = mediName.getText().toString();
@@ -316,10 +316,10 @@ public class AddMed extends AppCompatActivity {
                     }
                 }
 
-                Toast.makeText(AddMed.this, "Med Reminder added successfully",
+                Toast.makeText(EditMed.this, "Med Reminder added successfully",
                         Toast.LENGTH_SHORT).show();
 
-                Intent intent=new Intent(AddMed.this, MainActivity.class);
+                Intent intent=new Intent(EditMed.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                         | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -328,27 +328,27 @@ public class AddMed extends AppCompatActivity {
         });
     }
 
-   private void setEverydayAlarm(int hours, int minutes, String reminderKey, String childKey){
+    private void setEverydayAlarm(int hours, int minutes, String reminderKey, String childKey){
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
         intent.putExtra("reminderKey", reminderKey);
         intent.putExtra("childKey", childKey);
 
-       // Generate a unique request code based on reminderKey and childKey
-       int requestCode = (reminderKey + childKey).hashCode();
+        // Generate a unique request code based on reminderKey and childKey
+        int requestCode = (reminderKey + childKey).hashCode();
 
-       PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hours);
         calendar.set(Calendar.MINUTE, minutes);
         calendar.set(Calendar.SECOND, 0);
 
-       if(calendar.getTimeInMillis() <= System.currentTimeMillis()){
-           calendar.add(Calendar.DAY_OF_YEAR, 1);
-       }
+        if(calendar.getTimeInMillis() <= System.currentTimeMillis()){
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
 
-       alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
     }
 
@@ -441,7 +441,7 @@ public class AddMed extends AppCompatActivity {
             @Override
             public void onClick (View view) {
                 everydayBtn.setBackgroundResource(R.drawable.add_med_button_onclick);
-                everydayBtn.setTextColor(AddMed.this.getResources().getColor(R.color.dark10));
+                everydayBtn.setTextColor(EditMed.this.getResources().getColor(R.color.dark10));
                 customDateBtn.setBackgroundResource(R.drawable.add_med_button_normal);
                 everydaySelected = true;
                 customSelected = false;
@@ -486,7 +486,7 @@ public class AddMed extends AppCompatActivity {
             public void onClick (View view) {
 
                 customDateBtn.setBackgroundResource(R.drawable.add_med_button_onclick);
-                customDateBtn.setTextColor(AddMed.this.getResources().getColor(R.color.dark10));
+                customDateBtn.setTextColor(EditMed.this.getResources().getColor(R.color.dark10));
                 everydayBtn.setBackgroundResource(R.drawable.add_med_button_normal);
                 customSelected = true;
                 everydaySelected = false;
@@ -509,7 +509,7 @@ public class AddMed extends AppCompatActivity {
         ScrollView scrollView = findViewById(R.id.everyday_scroll);
         LinearLayout everydayTable = findViewById(R.id.everyday_table);
 
-        LinearLayout newEverydayRow = (LinearLayout) AddMed.this.getLayoutInflater().inflate(R.layout.everyday_item,null);
+        LinearLayout newEverydayRow = (LinearLayout) EditMed.this.getLayoutInflater().inflate(R.layout.everyday_item,null);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(0, 15, 0, 0);
@@ -520,7 +520,7 @@ public class AddMed extends AppCompatActivity {
         everydaySetTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerDialog timePicker = new TimePickerDialog(AddMed.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timePicker = new TimePickerDialog(EditMed.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet (TimePicker timePicker, int hours, int minutes) {
                         String ampm;
@@ -579,7 +579,7 @@ public class AddMed extends AppCompatActivity {
         ScrollView scrollView = findViewById(R.id.custom_scroll);
         LinearLayout customTable = findViewById(R.id.custom_table);
 
-        LinearLayout newCustomRow = (LinearLayout) AddMed.this.getLayoutInflater().inflate(R.layout.custom_item,null);
+        LinearLayout newCustomRow = (LinearLayout) EditMed.this.getLayoutInflater().inflate(R.layout.custom_item,null);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(0, 15, 0, 0);
@@ -587,7 +587,7 @@ public class AddMed extends AppCompatActivity {
 
         // Setup adapter for the spinner view
         Spinner daySpinner = newCustomRow.findViewById(R.id.custom_day);
-        adapterDays = new ArrayAdapter<>(AddMed.this, R.layout.selected_spinner_days, getResources().getStringArray(R.array.days));
+        adapterDays = new ArrayAdapter<>(EditMed.this, R.layout.selected_spinner_days, getResources().getStringArray(R.array.days));
         adapterDays.setDropDownViewResource(R.layout.spinner_list_days);
         daySpinner.setAdapter(adapterDays);
 
@@ -609,7 +609,7 @@ public class AddMed extends AppCompatActivity {
         customSetTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerDialog timePicker = new TimePickerDialog(AddMed.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timePicker = new TimePickerDialog(EditMed.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet (TimePicker timePicker, int hours, int minutes) {
                         String ampm;

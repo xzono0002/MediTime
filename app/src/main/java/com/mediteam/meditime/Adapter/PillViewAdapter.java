@@ -36,8 +36,6 @@ public class PillViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder (@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-//        View inflate = LayoutInflater.from(context).inflate(R.layout.receipt_item_everyday, parent, false);
-//        return new viewholder(inflate);
 
         if (viewType == VIEW_TYPE_EVERYDAY) {
             View inflate = LayoutInflater.from(context).inflate(R.layout.receipt_item_everyday, parent, false);
