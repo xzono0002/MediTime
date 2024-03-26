@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +28,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mediteam.meditime.Adapter.PillRemindAdapter;
 import com.mediteam.meditime.Adapter.PillViewAdapter;
+import com.mediteam.meditime.Helper.AlarmReceiver;
 import com.mediteam.meditime.Helper.MedReminder;
 import com.mediteam.meditime.Helper.ScheduleItem;
 import com.mediteam.meditime.R;
@@ -37,6 +41,7 @@ public class ScheduleReceipt extends AppCompatActivity {
     DatabaseReference reference;
     MedReminder object;
     private int num = 1;
+    private String childKey;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -45,6 +50,7 @@ public class ScheduleReceipt extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         getIntentExtra();
+        fetchKeys();
         setVariable();
         innitSched();
     }
@@ -180,6 +186,7 @@ public class ScheduleReceipt extends AppCompatActivity {
                                     @Override
                                     public void onSuccess (Void unused) {
                                         //Deletion succesfull
+                                        cancelAlarm(itemKey, childKey);
                                         Toast.makeText(ScheduleReceipt.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(ScheduleReceipt.this, MainActivity.class);
                                         startActivity(intent);
@@ -206,6 +213,38 @@ public class ScheduleReceipt extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void fetchKeys(){
+        String requestID = object.getMedId();
+        reference = FirebaseDatabase.getInstance().getReference("MedRemind").child(requestID);
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange (@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot reminderSnapshot : snapshot.getChildren()){
+                    // Check if the reminder has a 'schedule' node
+                    if (reminderSnapshot.hasChild("schedule")) {
+                        for (DataSnapshot childSnapshot : reminderSnapshot.child("schedule").getChildren()) {
+                            childKey = childSnapshot.getKey();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled (@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void cancelAlarm(String reminderKey, String childKey){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, (reminderKey + childKey).hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.cancel(pendingIntent);
+        pendingIntent.cancel();
     }
 
     private void getIntentExtra () {

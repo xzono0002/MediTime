@@ -4,6 +4,7 @@ public class ScheduleItem {
 
     private String days;
     private String times;
+    private String itemUID;
     private int pillQuantities;
 
     // Add getters and setters for the fields
@@ -25,6 +26,13 @@ public class ScheduleItem {
         this.times = time;
     }
 
+    public String getItemUID () {
+        return itemUID;
+    }
+
+    public void setItemUID (String itemUID) {
+        this.itemUID = itemUID;
+    }
 
     public int getPillQuantities () {
         return pillQuantities;
