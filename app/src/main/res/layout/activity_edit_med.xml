@@ -62,7 +62,7 @@
                             android:paddingStart="17dp" />
 
                         <ImageButton
-                            android:id="@+id/saveMedi"
+                            android:id="@+id/saveEdit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:srcCompat="@drawable/check_circle"
@@ -173,28 +173,59 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:orientation="horizontal"
                         android:layout_marginVertical="13dp"
-                        android:orientation="horizontal">
+                        android:gravity="center">
 
                         <TextView
                             style="@style/shadow"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:fontFamily="@font/inter_bold"
                             android:letterSpacing="0.05"
-                            android:text="Select Tube:"
+                            android:text="Storage:"
                             android:textColor="@color/dark"
                             android:textSize="12sp" />
 
-                        <Spinner
-                            android:id="@+id/tubeSelect"
-                            android:layout_width="match_parent"
-                            android:layout_height="33dp"
-                            android:layout_marginStart="20dp"
-                            android:background="@drawable/add_med_spinner"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="0dp" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="3"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/in_medi"
+                                style="@style/shadow"
+                                android:layout_width="0dp"
+                                android:layout_height="30dp"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="22dp"
+                                android:background="@drawable/add_med_button_normal"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:letterSpacing="0.03"
+                                android:paddingHorizontal="24dp"
+                                android:text="In Medi"
+                                android:textAppearance="@style/shadow"
+                                android:textColor="@color/light"
+                                android:textSize="12sp" />
+
+                            <Button
+                                android:id="@+id/out_medi"
+                                style="@style/shadow"
+                                android:layout_width="0dp"
+                                android:layout_height="30dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/add_med_button_normal"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:letterSpacing="0.03"
+                                android:paddingHorizontal="24dp"
+                                android:text="Out Medi"
+                                android:textAppearance="@style/shadow"
+                                android:textColor="@color/light"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -304,6 +335,35 @@
                         </LinearLayout>
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="13dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/shadow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/inter_bold"
+                            android:letterSpacing="0.05"
+                            android:text="Select Tube:"
+                            android:textColor="@color/dark"
+                            android:textSize="12sp" />
+
+                        <Spinner
+                            android:id="@+id/tubeSelect"
+                            android:layout_width="match_parent"
+                            android:layout_height="33dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/add_med_spinner"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="0dp" />
+
+                    </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"

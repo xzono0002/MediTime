@@ -14,6 +14,8 @@ public class MedReminder implements Serializable {
     private String tubeSelection;
     private String pillForm;
     private String repeat;
+    private Boolean inStorage;
+
     private Map<String, ScheduleItem> schedule;
 
     public MedReminder () {
@@ -88,6 +90,13 @@ public class MedReminder implements Serializable {
         this.repeat = repeat;
     }
 
+    public Boolean getInStorage() {
+        return inStorage;
+    }
+
+    public void setInStorage(Boolean inStorage) {
+        this.inStorage = inStorage;
+    }
 }
 
 

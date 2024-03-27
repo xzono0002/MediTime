@@ -9,6 +9,14 @@
     android:background="@color/light10"
     android:orientation="vertical">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:indeterminateDrawable="@drawable/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,55 +28,54 @@
             android:animateLayoutChanges="true">
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/addMedToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:background="@drawable/toolbar"
-                    android:paddingHorizontal="20dp"
-                    >
+                    android:paddingHorizontal="20dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <ImageButton
                             android:id="@+id/backHome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/back_ios"
                             android:layout_gravity="center"
                             android:background="@color/transparent"
-                            />
+                            app:srcCompat="@drawable/back_ios" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ADD MED"
-                            android:textAllCaps="true"
-                            android:fontFamily="@font/inter_extrabold"
-                            android:textSize="15sp"
-                            android:letterSpacing="0.09"
-                            android:textAppearance="@style/shadow"
-                            android:textColor="@color/light"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:paddingStart="17dp" />
+                            android:fontFamily="@font/inter_extrabold"
+                            android:letterSpacing="0.09"
+                            android:paddingStart="17dp"
+                            android:text="ADD MED"
+                            android:textAllCaps="true"
+                            android:textAppearance="@style/shadow"
+                            android:textColor="@color/light"
+                            android:textSize="15sp" />
 
                         <ImageButton
                             android:id="@+id/saveMedi"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/check_circle"
                             android:layout_marginEnd="20dp"
-                            android:background="@color/transparent"/>
+                            android:background="@color/transparent"
+                            app:srcCompat="@drawable/check_circle" />
 
                     </LinearLayout>
 
@@ -89,8 +96,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="13dp">
+                            android:layout_marginBottom="13dp"
+                            android:orientation="horizontal">
 
                             <TextView
                                 style="@style/shadow"
@@ -107,13 +114,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
+                                android:layout_marginStart="20dp"
                                 android:fontFamily="@font/inter_bold"
                                 android:letterSpacing="0.05"
+                                android:text="@string/error_empty"
                                 android:textColor="@color/error"
                                 android:textSize="11sp"
-                                android:text="@string/error_empty"
-                                android:visibility="invisible"
-                                android:layout_marginStart="20dp"/>
+                                android:visibility="invisible" />
 
 
                         </LinearLayout>
@@ -135,7 +142,6 @@
                     </LinearLayout>
 
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -146,13 +152,13 @@
                             style="@style/shadow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
                             android:fontFamily="@font/inter_bold"
+                            android:gravity="center_vertical"
                             android:letterSpacing="0.05"
                             android:text="Refilled pills on tube:"
                             android:textColor="@color/dark"
-                            android:textSize="12sp"
-                            android:layout_marginEnd="10dp"
-                            android:gravity="center_vertical"/>
+                            android:textSize="12sp" />
 
                         <EditText
                             android:id="@+id/etPillsOnTube"
@@ -164,21 +170,21 @@
                             android:hint="1"
                             android:inputType="number"
                             android:letterSpacing="0.05"
+                            android:maxLength="100"
                             android:paddingHorizontal="14dp"
                             android:textColor="@color/dark10"
                             android:textColorHint="@color/dark20"
-                            android:textSize="12sp"
 
-                            android:maxLength="100"/>
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
                         android:layout_marginTop="13dp"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <TextView
                             style="@style/shadow"
@@ -193,9 +199,9 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="3"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
+                            android:layout_weight="3"
                             android:orientation="horizontal">
 
                             <Button
@@ -203,15 +209,15 @@
                                 style="@style/shadow"
                                 android:layout_width="0dp"
                                 android:layout_height="30dp"
-                                android:layout_weight="1"
                                 android:layout_marginEnd="22dp"
-                                android:background="@drawable/add_med_button_normal"
+                                android:layout_weight="1"
+                                android:background="@drawable/add_med_button_onclick"
                                 android:fontFamily="@font/montserrat_bold"
                                 android:letterSpacing="0.03"
                                 android:paddingHorizontal="24dp"
                                 android:text="In Medi"
                                 android:textAppearance="@style/shadow"
-                                android:textColor="@color/light"
+                                android:textColor="@color/dark10"
                                 android:textSize="12sp" />
 
                             <Button
@@ -233,10 +239,41 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/tube_sel_container"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="13dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/shadow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/inter_bold"
+                            android:letterSpacing="0.05"
+                            android:text="Select Tube:"
+                            android:textColor="@color/dark"
+                            android:textSize="12sp" />
+
+                        <Spinner
+                            android:id="@+id/tubeSelect"
+                            android:layout_width="match_parent"
+                            android:layout_height="33dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/add_med_spinner"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="0dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/dos_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="13dp"
                         android:orientation="vertical"
-                        android:layout_marginTop="13dp">
+                        android:visibility="gone">
 
                         <TextView
                             style="@style/shadow"
@@ -288,6 +325,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/sched_container"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="13dp"
@@ -340,34 +378,6 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginVertical="13dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/shadow"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/inter_bold"
-                            android:letterSpacing="0.05"
-                            android:text="Select Tube:"
-                            android:textColor="@color/dark"
-                            android:textSize="12sp" />
-
-                        <Spinner
-                            android:id="@+id/tubeSelect"
-                            android:layout_width="match_parent"
-                            android:layout_height="33dp"
-                            android:layout_marginStart="20dp"
-                            android:background="@drawable/add_med_spinner"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="0dp" />
-
-                    </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -390,19 +400,19 @@
                             style="@style/shadow"
                             android:layout_width="match_parent"
                             android:layout_height="120dp"
+                            android:layout_marginTop="10dp"
                             android:background="@drawable/edit_text_bg"
                             android:fontFamily="@font/montserrat_bold"
+                            android:gravity="start"
                             android:hint="Add notes here..."
                             android:inputType="textMultiLine"
                             android:letterSpacing="0.05"
+                            android:maxLength="200"
                             android:paddingHorizontal="14dp"
                             android:paddingVertical="14dp"
                             android:textColor="@color/dark10"
                             android:textColorHint="@color/dark20"
-                            android:textSize="12sp"
-                            android:layout_marginTop="10dp"
-                            android:maxLength="200"
-                            android:gravity="start"/>
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 

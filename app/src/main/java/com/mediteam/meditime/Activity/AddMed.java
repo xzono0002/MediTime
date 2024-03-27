@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -53,8 +54,9 @@ public class AddMed extends AppCompatActivity {
     private TextView errorText;
     private EditText mediName, pillOnTube, etNote;
     private ImageButton bckHome, saveMedi;
-    private Button tabletBtn, capsuleBtn, everydayBtn, customDateBtn, addPill, minusPill;
+    private Button tabletBtn, capsuleBtn, everydayBtn, customDateBtn, addPill, minusPill, inMedi, outMedi;
     private Spinner selectTube;
+    private ProgressBar progressBar;
     ArrayAdapter<String> adapter, adapterDays;
     ArrayList<String> assignedTubes = new ArrayList<>();
     private String tubeSelected, dosForm, schedule, day, time, key;
@@ -70,6 +72,8 @@ public class AddMed extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
 
+        medReminder = new MedReminder();
+
         bckHome = findViewById(R.id.backHome);
         saveMedi = findViewById(R.id.saveMedi);
         mediName = findViewById(R.id.etMedication);
@@ -80,6 +84,9 @@ public class AddMed extends AppCompatActivity {
         everydayBtn = findViewById(R.id.everyday);
         customDateBtn =findViewById(R.id.customDate);
         errorText = findViewById(R.id.add_med_error);
+        inMedi = findViewById(R.id.in_medi);
+        outMedi = findViewById(R.id.out_medi);
+        progressBar = findViewById(R.id.progressBar);
 
         selectTube = findViewById(R.id.tubeSelect);
 
@@ -119,6 +126,9 @@ public class AddMed extends AppCompatActivity {
                 if(!validateFields()){
 
                 } else{
+                    progressBar.bringToFront();
+                    progressBar.setVisibility(View.VISIBLE);
+                    saveMedi.setEnabled(false);
                     saveMedSchedule();
                 }
             }
@@ -148,6 +158,37 @@ public class AddMed extends AppCompatActivity {
 
 
     private void setVariable () {
+
+        inMedi.setSelected(true);
+        inMedi.setBackgroundResource(R.drawable.add_med_button_onclick);
+
+        outMedi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout dosCon = findViewById(R.id.dos_container);
+                LinearLayout tubeSel = findViewById(R.id.tube_sel_container);
+                dosCon.setVisibility(View.VISIBLE);
+                tubeSel.setVisibility(View.GONE);
+                inMedi.setBackgroundResource(R.drawable.add_med_button_normal);
+                outMedi.setBackgroundResource(R.drawable.add_med_button_onclick);
+                outMedi.setTextColor(AddMed.this.getColor(R.color.dark10));
+                inMedi.setTextColor(AddMed.this.getColor(R.color.light));
+            }
+        });
+
+        inMedi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout dosCon = findViewById(R.id.dos_container);
+                LinearLayout tubeSel = findViewById(R.id.tube_sel_container);
+                dosCon.setVisibility(View.GONE);
+                tubeSel.setVisibility(View.VISIBLE);
+                outMedi.setBackgroundResource(R.drawable.add_med_button_normal);
+                inMedi.setBackgroundResource(R.drawable.add_med_button_onclick);
+                inMedi.setTextColor(AddMed.this.getColor(R.color.dark10));
+                outMedi.setTextColor(AddMed.this.getColor(R.color.light));
+            }
+        });
 
         //when back button is clicked
         bckHome.setOnClickListener(new View.OnClickListener() {
@@ -205,39 +246,60 @@ public class AddMed extends AppCompatActivity {
         String etNotes = etNote.getText().toString();
         String defaultText = "-- Select Available Tube --";
 
-        if(pillName.isEmpty() || etNotes.isEmpty() || pillsOnTube.isEmpty()){
-            errorText.setVisibility(View.VISIBLE);
-            return false;
-        } else if(pillsOnTube.equals("0")) {
-            errorText.setVisibility(View.VISIBLE);
-            return false;
-        } else if(!tabletSelected && !capsuleSelected){
-            errorText.setVisibility(View.VISIBLE);
-            return false;
-        } else if(!everydaySelected && !customSelected){
-            errorText.setVisibility(View.VISIBLE);
-            return false;
-        } else if(tubeSelected.equals(defaultText)) {
-            errorText.setVisibility(View.VISIBLE);
-            return false;
-        } else return true;
+        if (inMedi.isSelected()){
+            if(pillName.isEmpty() || pillsOnTube.isEmpty()){
+                errorText.setVisibility(View.VISIBLE);
+                return false;
+            } else if(pillsOnTube.equals("0")) {
+                errorText.setVisibility(View.VISIBLE);
+                return false;
+            }
+            else if(!everydaySelected && !customSelected){
+                errorText.setVisibility(View.VISIBLE);
+                return false;
+            } else if(tubeSelected.equals(defaultText)) {
+                errorText.setVisibility(View.VISIBLE);
+                return false;
+            } else {
+                medReminder.setMedicine(pillName);
+                medReminder.setPillsOnTube(pillsOnTube);
+                medReminder.setNotes(etNotes);
+                medReminder.setTubeSelection(tubeSelected);
+                medReminder.setRepeat(schedule);
+                medReminder.setInStorage(true);
+                return true;
+            }
+        } else if (outMedi.isSelected()){
+            if(pillName.isEmpty() || pillsOnTube.isEmpty()){
+                errorText.setVisibility(View.VISIBLE);
+                return false;
+            } else if(pillsOnTube.equals("0")) {
+                errorText.setVisibility(View.VISIBLE);
+                return false;
+            } else if(!tabletSelected && !capsuleSelected){
+                errorText.setVisibility(View.VISIBLE);
+                return false;
+            }
+            else if(!everydaySelected && !customSelected){
+                errorText.setVisibility(View.VISIBLE);
+                return false;
+            } else {
+                medReminder.setMedicine(pillName);
+                medReminder.setPillsOnTube(pillsOnTube);
+                medReminder.setNotes(etNotes);
+                medReminder.setPillForm(dosForm);
+                medReminder.setRepeat(schedule);
+                medReminder.setInStorage(false);
+                return true;
+            }
+        }
+        return true;
     }
 
     private void saveMedSchedule () {
 
         String userID = firebaseUser.getUid();
-        String medTitle = mediName.getText().toString();
-        String pillsOntube = pillOnTube.getText().toString();
-        String notes = etNote.getText().toString();
-
-        medReminder = new MedReminder();
-        medReminder.setMedicine(medTitle);
-        medReminder.setTubeSelection(tubeSelected);
-        medReminder.setPillForm(dosForm);
-        medReminder.setRepeat(schedule);
         medReminder.setUserid(userID);
-        medReminder.setPillsOnTube(pillsOntube);
-        medReminder.setNotes(notes);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("MedRemind");
         key = databaseReference.child("MedReminder").push().getKey();
@@ -246,84 +308,88 @@ public class AddMed extends AppCompatActivity {
         databaseReference.child(key).setValue(medReminder).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete (@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    // If everyday is selected, get everyday items
+                    if(everydaySelected){
+                        LinearLayout everydayTable = findViewById(R.id.everyday_table);
+                        for (int i = 1; i < everydayTable.getChildCount(); i++){
+                            String everydayKey = databaseReference.child(key).child("everyday").push().getKey();
 
-                // If everyday is selected, get everyday items
-                if(everydaySelected){
-                    LinearLayout everydayTable = findViewById(R.id.everyday_table);
-                    for (int i = 1; i < everydayTable.getChildCount(); i++){
-                        String everydayKey = databaseReference.child(key).child("everyday").push().getKey();
+                            View view = everydayTable.getChildAt(i);
+                            time = ((TextView) view.findViewById(R.id.everyday_time)).getText().toString();
+                            pills = Integer.parseInt(((EditText) view.findViewById(R.id.everydayPill)).getText().toString());
 
-                        View view = everydayTable.getChildAt(i);
-                        time = ((TextView) view.findViewById(R.id.everyday_time)).getText().toString();
-                        pills = Integer.parseInt(((EditText) view.findViewById(R.id.everydayPill)).getText().toString());
+                            databaseReference.child(key).child("schedule").child(everydayKey).child("days").setValue(" ");
+                            databaseReference.child(key).child("schedule").child(everydayKey).child("times").setValue(time);
+                            databaseReference.child(key).child("schedule").child(everydayKey).child("pillQuantities").setValue(pills);
 
-                        databaseReference.child(key).child("schedule").child(everydayKey).child("days").setValue(" ");
-                        databaseReference.child(key).child("schedule").child(everydayKey).child("times").setValue(time);
-                        databaseReference.child(key).child("schedule").child(everydayKey).child("pillQuantities").setValue(pills);
+                            //Extract the AM/PM from the time string
+                            String[] parts = time.split(" ");
+                            String[] timeParts = parts[0].split(":"); // Extract hours and minutes from the time string
 
-                        //Extract the AM/PM from the time string
-                        String[] parts = time.split(" ");
-                        String[] timeParts = parts[0].split(":"); // Extract hours and minutes from the time string
+                            int hour = Integer.parseInt(timeParts[0]);
+                            int minute = Integer.parseInt(timeParts[1]);
 
-                        int hour = Integer.parseInt(timeParts[0]);
-                        int minute = Integer.parseInt(timeParts[1]);
+                            // Convert hour to 24-hour format if necessary
+                            if (parts[1].equals("PM")) {
+                                hour = (hour == 12) ? 12 : hour + 12; // Add 12 to hour if it's PM, but keep 12 PM as it is
+                            } else {
+                                hour = (hour == 12) ? 0 : hour; // If it's AM and hour is 12, set hour to 0, otherwise keep hour as it is
+                            }
 
-                        // Convert hour to 24-hour format if necessary
-                        if (parts[1].equals("PM")) {
-                            hour = (hour == 12) ? 12 : hour + 12; // Add 12 to hour if it's PM, but keep 12 PM as it is
-                        } else {
-                            hour = (hour == 12) ? 0 : hour; // If it's AM and hour is 12, set hour to 0, otherwise keep hour as it is
+                            ScheduleItem scheduleItem = new ScheduleItem();
+                            scheduleItem.setDay(" ");
+                            scheduleItem.setTime(time);
+                            scheduleItem.setPillQuantities(pills);
+
+                            setEverydayAlarm(hour, minute, key, everydayKey);
+
                         }
-
-                        ScheduleItem scheduleItem = new ScheduleItem();
-                        scheduleItem.setDay(" ");
-                        scheduleItem.setTime(time);
-                        scheduleItem.setPillQuantities(pills);
-
-                        setEverydayAlarm(hour, minute, key, everydayKey);
-
                     }
-                }
 
-                // If custom day is selected, get custom items
-                else if(customSelected) {
-                    LinearLayout customTable = findViewById(R.id.custom_table);
-                    for (int i = 1; i < customTable.getChildCount(); i++){
-                        String customKey = databaseReference.child(key).child("custom").push().getKey();
+                    // If custom day is selected, get custom items
+                    else if(customSelected) {
+                        LinearLayout customTable = findViewById(R.id.custom_table);
+                        for (int i = 1; i < customTable.getChildCount(); i++){
+                            String customKey = databaseReference.child(key).child("custom").push().getKey();
 
-                        View view = customTable.getChildAt(i);
-                        day = ((Spinner) view.findViewById(R.id.custom_day)).getSelectedItem().toString();
-                        time = ((TextView) view.findViewById(R.id.custom_time)).getText().toString();
-                        pills = Integer.parseInt(((EditText) view.findViewById(R.id.customPill)).getText().toString());
+                            View view = customTable.getChildAt(i);
+                            day = ((Spinner) view.findViewById(R.id.custom_day)).getSelectedItem().toString();
+                            time = ((TextView) view.findViewById(R.id.custom_time)).getText().toString();
+                            pills = Integer.parseInt(((EditText) view.findViewById(R.id.customPill)).getText().toString());
 
-                        databaseReference.child(key).child("schedule").child(customKey).child("days").setValue(day);
-                        databaseReference.child(key).child("schedule").child(customKey).child("times").setValue(time);
-                        databaseReference.child(key).child("schedule").child(customKey).child("pillQuantities").setValue(pills);
+                            databaseReference.child(key).child("schedule").child(customKey).child("days").setValue(day);
+                            databaseReference.child(key).child("schedule").child(customKey).child("times").setValue(time);
+                            databaseReference.child(key).child("schedule").child(customKey).child("pillQuantities").setValue(pills);
 
-                        // Extract hours and minutes from the time string
-                        String[] parts = time.split(" ");
-                        String[] timeParts = parts[0].split(":");
+                            // Extract hours and minutes from the time string
+                            String[] parts = time.split(" ");
+                            String[] timeParts = parts[0].split(":");
 
-                        int hour = Integer.parseInt(timeParts[0]);
-                        int minute = Integer.parseInt(timeParts[1]);
+                            int hour = Integer.parseInt(timeParts[0]);
+                            int minute = Integer.parseInt(timeParts[1]);
 
-                        ScheduleItem scheduleItem = new ScheduleItem();
-                        scheduleItem.setDay(day);
-                        scheduleItem.setTime(time);
-                        scheduleItem.setPillQuantities(pills);
+                            ScheduleItem scheduleItem = new ScheduleItem();
+                            scheduleItem.setDay(day);
+                            scheduleItem.setTime(time);
+                            scheduleItem.setPillQuantities(pills);
 
-                        setCustomAlarm(hour, minute, key, customKey, day);
+                            setCustomAlarm(hour, minute, key, customKey, day);
+                        }
                     }
+
+                    Toast.makeText(AddMed.this, "Med Reminder added successfully",
+                            Toast.LENGTH_SHORT).show();
+
+                    Intent intent=new Intent(AddMed.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    saveMedi.setEnabled(true);
+                    progressBar.setVisibility(View.GONE);
                 }
-
-                Toast.makeText(AddMed.this, "Med Reminder added successfully",
-                        Toast.LENGTH_SHORT).show();
-
-                Intent intent=new Intent(AddMed.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
             }
         });
     }
