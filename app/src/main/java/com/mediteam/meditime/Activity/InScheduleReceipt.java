@@ -26,18 +26,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.mediteam.meditime.Adapter.PillRemindAdapter;
 import com.mediteam.meditime.Adapter.PillViewAdapter;
 import com.mediteam.meditime.Helper.AlarmReceiver;
 import com.mediteam.meditime.Helper.MedReminder;
 import com.mediteam.meditime.Helper.ScheduleItem;
 import com.mediteam.meditime.R;
-import com.mediteam.meditime.databinding.ActivityScheduleReceiptBinding;
+import com.mediteam.meditime.databinding.ActivityInscheduleReceiptBinding;
 
 import java.util.ArrayList;
 
-public class ScheduleReceipt extends AppCompatActivity {
-    ActivityScheduleReceiptBinding binding;
+public class InScheduleReceipt extends AppCompatActivity {
+    ActivityInscheduleReceiptBinding binding;
     DatabaseReference reference;
     MedReminder object;
     private int num = 1;
@@ -46,7 +45,7 @@ public class ScheduleReceipt extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityScheduleReceiptBinding.inflate(getLayoutInflater());
+        binding = ActivityInscheduleReceiptBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         getIntentExtra();
@@ -91,7 +90,7 @@ public class ScheduleReceipt extends AppCompatActivity {
                     medReminder.setRepeat(repeat);
 
                     if (!list.isEmpty()){
-                        binding.schedMed.setLayoutManager(new LinearLayoutManager(ScheduleReceipt.this, LinearLayoutManager.VERTICAL, false));
+                        binding.schedMed.setLayoutManager(new LinearLayoutManager(InScheduleReceipt.this, LinearLayoutManager.VERTICAL, false));
                         RecyclerView.Adapter adapter = new PillViewAdapter(list, medReminder);
                         binding.schedMed.setAdapter(adapter);
                     }
@@ -112,7 +111,6 @@ public class ScheduleReceipt extends AppCompatActivity {
         binding.medTitle.setText(object.getMedicine());
         binding.tubes.setText(object.getTubeSelection());
         binding.refilledPills.setText(object.getPillsOnTube());
-        binding.dosForm.setText(object.getPillForm());
         binding.sched.setText(object.getRepeat());
         binding.note.setText(object.getNotes());
 
@@ -131,13 +129,11 @@ public class ScheduleReceipt extends AppCompatActivity {
             custom.setVisibility(View.VISIBLE);
             everyday.setVisibility(View.GONE);
         }
-//        binding.storage.setText(object.getStorage());
 
         binding.editMedi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                Intent intent = new Intent(ScheduleReceipt.this, EditMed.class);
-                startActivity(intent);
+                startActivity(new Intent(InScheduleReceipt.this, EditMed.class));
             }
         });
 
@@ -166,7 +162,7 @@ public class ScheduleReceipt extends AppCompatActivity {
                     public void onClick (View view) {
                         String itemKey = object.getMedId();
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(ScheduleReceipt.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(InScheduleReceipt.this);
                         View dialogView = getLayoutInflater().inflate(R.layout.delete_alert, null);
                         builder.setView(dialogView);
 
@@ -187,15 +183,16 @@ public class ScheduleReceipt extends AppCompatActivity {
                                     public void onSuccess (Void unused) {
                                         //Deletion succesfull
                                         cancelAlarm(itemKey, childKey);
-                                        Toast.makeText(ScheduleReceipt.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(ScheduleReceipt.this, MainActivity.class);
+                                        Toast.makeText(InScheduleReceipt.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(InScheduleReceipt.this, MainActivity.class);
                                         startActivity(intent);
+                                        finish();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure (@NonNull Exception e) {
                                         //Deletion failed
-                                        Toast.makeText(ScheduleReceipt.this, "Failed to delete item: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(InScheduleReceipt.this, "Failed to delete item: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
 

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ForgotPass"
+    tools:context=".Activity.ForgotPin"
     android:background="@color/light10"
     android:orientation="vertical">
 
@@ -22,7 +22,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/changeEmail_back"
+                android:id="@+id/forgotPin_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -60,7 +60,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Change email address"
+                android:text="Change PIN"
                 android:fontFamily="@font/inter_extrabold"
                 android:textSize="16sp"
                 android:textColor="@color/dark10"
@@ -70,12 +70,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Please enter your new email below"
+                android:text="For your protection, avoid using weak, easy to guess MPINs such as 1234, 1111 or your birthdate."
                 android:fontFamily="@font/inter_bold"
                 android:textSize="12sp"
                 android:textColor="@color/dark20"
                 android:letterSpacing=".03" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -85,7 +84,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/changeEmail_oldEmail"
+                android:id="@+id/forgotPin_email"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:background="@drawable/light_bg"
@@ -99,39 +98,22 @@
                 android:textColorHint="@color/dark20"
                 android:textSize="11sp" />
 
-            <EditText
-                android:id="@+id/changeEmail_newEmail"
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:background="@drawable/light_bg"
-                android:fontFamily="@font/montserrat_bold"
-                android:hint="New Email Address"
-                android:inputType="textEmailAddress"
-                android:letterSpacing="0.05"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:textColor="@color/dark10"
-                android:textColorHint="@color/dark20"
-                android:textSize="11sp"
-                android:layout_marginTop="7dp"/>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
-                android:layout_marginTop="7dp"
                 android:background="@drawable/light_bg"
                 app:hintEnabled="false"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/dark20">
+                app:passwordToggleTint="@color/dark20"
+                android:layout_marginTop="14dp">
 
                 <EditText
-                    android:id="@+id/changeEmail_pass"
+                    android:id="@+id/forgotPin_pass"
                     android:layout_width="match_parent"
                     android:layout_height="33dp"
-                    android:layout_marginTop="7dp"
                     android:background="@drawable/light_bg"
                     android:fontFamily="@font/montserrat_bold"
-                    android:hint="@string/password"
+                    android:hint="Password"
                     android:inputType="textPassword"
                     android:letterSpacing="0.05"
                     android:paddingStart="14dp"
@@ -142,8 +124,62 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/light_bg"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/dark20">
+
+                <EditText
+                    android:id="@+id/forgotPin_newPin"
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:background="@drawable/light_bg"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:hint="New PIN"
+                    android:inputType="textPassword"
+                    android:letterSpacing="0.05"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="@color/dark10"
+                    android:textColorHint="@color/dark20"
+                    android:textSize="11sp"
+                    android:maxLength="4"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:background="@drawable/light_bg"
+                app:hintEnabled="false"
+                android:layout_marginTop="14dp"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/dark20">
+
+                <EditText
+                    android:id="@+id/forgotPin_conPin"
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:background="@drawable/light_bg"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:hint="Confirm PIN"
+                    android:inputType="textPassword"
+                    android:letterSpacing="0.05"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="@color/dark10"
+                    android:textColorHint="@color/dark20"
+                    android:textSize="11sp"
+                    android:maxLength="4"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
-                android:id="@+id/changeEmail_error"
+                android:id="@+id/forgotPin_error"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -156,22 +192,22 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/changeEmail_btn"
+            android:id="@+id/forgotPin_btn"
+            style="@style/shadow"
             android:layout_width="224dp"
             android:layout_height="33dp"
             android:layout_gravity="center"
             android:background="@drawable/buton"
-            style="@style/shadow"
             android:fontFamily="@font/inter_extrabold"
             android:letterSpacing="0.15"
-            android:text="CHANGE EMAIL"
+            android:text="CHANGE PIN"
             android:textAllCaps="true"
             android:textAppearance="@style/shadow"
             android:textColor="@color/dark10"
             android:textSize="12sp" />
 
         <ProgressBar
-            android:id="@+id/changeEmail_progress"
+            android:id="@+id/forgotPin_progress"
             android:layout_width="224dp"
             android:layout_height="33dp"
             android:background="@drawable/buton"

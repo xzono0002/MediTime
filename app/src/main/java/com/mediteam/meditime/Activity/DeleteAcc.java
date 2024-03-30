@@ -131,10 +131,20 @@ public class DeleteAcc extends AppCompatActivity {
                                         @Override
                                         public void onSuccess (Void unused) {
                                             //Deletion succesfull
-                                            Toast.makeText(DeleteAcc.this, "Account deleted successfully", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(DeleteAcc.this, Login.class);
-                                            startActivity(intent);
-                                            finish();
+                                            firebaseUser.delete().addOnCompleteListener(deleteTask -> {
+                                                if(deleteTask.isSuccessful()){
+                                                    mauth.signOut();
+                                                    Toast.makeText(DeleteAcc.this, "Account deleted successfully", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(DeleteAcc.this, Login.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                } else{
+                                                    delAcc.setVisibility(View.VISIBLE);
+                                                    progressBar.setVisibility(View.GONE);
+                                                    error.setVisibility(View.VISIBLE);
+                                                    error.setText(deleteTask.getException().getMessage());
+                                                }
+                                            });
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override

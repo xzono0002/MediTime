@@ -72,6 +72,17 @@ public class PinModule extends AppCompatActivity {
                 }
             }
         });
+
+        forgotPin = findViewById(R.id.forgotPin);
+        forgotPin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                Intent intent = new Intent(PinModule.this, ForgotPin.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
     }
 
     private void updateText (String strToAdd){

@@ -72,7 +72,7 @@ public class Login extends AppCompatActivity {
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                startActivity(new Intent(Login.this, CheckEmail.class));
+                startActivity(new Intent(Login.this, ForgotPass.class));
             }
         });
     }

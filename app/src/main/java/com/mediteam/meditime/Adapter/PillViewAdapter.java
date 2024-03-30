@@ -1,24 +1,19 @@
 package com.mediteam.meditime.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mediteam.meditime.Activity.ScheduleReceipt;
 import com.mediteam.meditime.Helper.MedReminder;
 import com.mediteam.meditime.Helper.ScheduleItem;
 import com.mediteam.meditime.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PillViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     ArrayList<ScheduleItem> items;

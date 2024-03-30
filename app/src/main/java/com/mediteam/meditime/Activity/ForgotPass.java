@@ -15,11 +15,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.mediteam.meditime.R;
 
-public class CheckEmail extends AppCompatActivity {
+public class ForgotPass extends AppCompatActivity {
 
     private Button getEmail;
     private ImageButton back;
@@ -66,11 +65,11 @@ public class CheckEmail extends AppCompatActivity {
                     @Override
                     public void onComplete (@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(CheckEmail.this, "Password reset email sent", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(CheckEmail.this, Login.class));
+                            Toast.makeText(ForgotPass.this, "Password reset email sent", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(ForgotPass.this, Login.class));
                             finish();
                         } else {
-                            Toast.makeText(CheckEmail.this, "Failed to send password reset email", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ForgotPass.this, "Failed to send password reset email", Toast.LENGTH_SHORT).show();
                         }
                     }
         });

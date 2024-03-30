@@ -41,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"/>
                     <ImageButton
-                        android:id="@+id/saveMedi"
+                        android:id="@+id/saveEdit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/check_circle"

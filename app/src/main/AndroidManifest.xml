@@ -19,6 +19,9 @@
         android:theme="@style/Theme.MediTime"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.ForgotPin"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ChangePin"
             android:exported="false" />
         <activity
@@ -31,7 +34,7 @@
             android:name=".Activity.ChangeUsername"
             android:exported="false" />
         <activity
-            android:name=".Activity.CheckEmail"
+            android:name=".Activity.ForgotPass"
             android:exported="false" />
         <activity
             android:name=".Activity.ChangePass"
@@ -40,7 +43,10 @@
             android:name=".Activity.EditMed"
             android:exported="false" />
         <activity
-            android:name=".Activity.ScheduleReceipt"
+            android:name=".Activity.InScheduleReceipt"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.OutScheduleReceipt"
             android:exported="false" />
         <activity
             android:name=".Activity.AddMedReceipt"

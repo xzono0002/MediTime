@@ -52,7 +52,7 @@ public class EditMed extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private TextView errorText;
     private EditText mediName, pillOnTube, etNote;
-    private ImageButton bckHome, saveMedi;
+    private ImageButton bckHome, saveEdit;
     private Button tabletBtn, capsuleBtn, everydayBtn, customDateBtn, addPill, minusPill;
     private Spinner selectTube;
     ArrayAdapter<String> adapter, adapterDays;
@@ -70,8 +70,8 @@ public class EditMed extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
 
-        bckHome = findViewById(R.id.backHome);
-        saveMedi = findViewById(R.id.saveMedi);
+        bckHome = findViewById(R.id.edit_back);
+        saveEdit = findViewById(R.id.saveEdit);
         mediName = findViewById(R.id.etMedication);
         pillOnTube = findViewById(R.id.etPillsOnTube);
         etNote = findViewById(R.id.etNote);
@@ -113,7 +113,7 @@ public class EditMed extends AppCompatActivity {
             }
         });
 
-        saveMedi.setOnClickListener(new View.OnClickListener() {
+        saveEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
                 if(!validateFields()){

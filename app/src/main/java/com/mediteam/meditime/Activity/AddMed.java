@@ -61,7 +61,7 @@ public class AddMed extends AppCompatActivity {
     ArrayList<String> assignedTubes = new ArrayList<>();
     private String tubeSelected, dosForm, schedule, day, time, key;
     private int pills;
-    private boolean tabletSelected = false, capsuleSelected = false, everydaySelected = false, customSelected = false;
+    private boolean tabletSelected = false, capsuleSelected = false, everydaySelected = false, customSelected = false, insideMedi = true, outsideMedi = false;
     MedReminder medReminder;
 
     @Override
@@ -173,6 +173,8 @@ public class AddMed extends AppCompatActivity {
                 outMedi.setBackgroundResource(R.drawable.add_med_button_onclick);
                 outMedi.setTextColor(AddMed.this.getColor(R.color.dark10));
                 inMedi.setTextColor(AddMed.this.getColor(R.color.light));
+                outMedi.setSelected(true);
+                inMedi.setSelected(false);
             }
         });
 
@@ -187,6 +189,8 @@ public class AddMed extends AppCompatActivity {
                 inMedi.setBackgroundResource(R.drawable.add_med_button_onclick);
                 inMedi.setTextColor(AddMed.this.getColor(R.color.dark10));
                 outMedi.setTextColor(AddMed.this.getColor(R.color.light));
+                inMedi.setSelected(true);
+                outMedi.setSelected(false);
             }
         });
 

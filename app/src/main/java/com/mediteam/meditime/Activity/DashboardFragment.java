@@ -1,7 +1,5 @@
 package com.mediteam.meditime.Activity;
 
-import static android.content.Intent.getIntent;
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +26,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.mediteam.meditime.Activity.AddMed;
-import com.mediteam.meditime.Adapter.PillRemindAdapter;
+import com.mediteam.meditime.Adapter.insideMedAdapter;
+import com.mediteam.meditime.Adapter.outsideMedAdapter;
 import com.mediteam.meditime.Helper.MedReminder;
 import com.mediteam.meditime.R;
-import com.mediteam.meditime.databinding.ActivityMainBinding;
 import com.mediteam.meditime.databinding.FragmentDashboardBinding;
 
 import java.util.ArrayList;
@@ -45,7 +41,7 @@ public class DashboardFragment extends Fragment {
     private DatabaseReference reference;
     private TextView userGreet;
     private FloatingActionButton addMed;
-    private ProgressBar progressBar;
+    private ProgressBar progressBar1, progressBar2;
     private RecyclerView insideMedi, outsideMedi;
     private SwipeRefreshLayout swipeContainer;
 
@@ -60,8 +56,10 @@ public class DashboardFragment extends Fragment {
 
         userGreet = root.findViewById(R.id.greetUser);
         addMed = root.findViewById(R.id.addMedic);
-        progressBar = root.findViewById(R.id.dashProgress);
-        insideMedi = root.findViewById(R.id.medView);
+        progressBar1 = root.findViewById(R.id.dashInProgress);
+        progressBar2 = root.findViewById(R.id.dashOutProgress);
+        insideMedi = root.findViewById(R.id.inMedView);
+        outsideMedi = root.findViewById(R.id.outMedView);
 
         addMed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +72,8 @@ public class DashboardFragment extends Fragment {
         CheckForEmailVerified(firebaseUser);
 
         DisplayUser();
-        initSchedMed();
+        initSchedinMed();
+        initSchedoutMed();
 
         return root;
 
@@ -115,30 +114,34 @@ public class DashboardFragment extends Fragment {
         }
     }
 
-    private void initSchedMed () {
-        reference = FirebaseDatabase.getInstance().getReference("MedRemind");
-        progressBar.setVisibility(View.VISIBLE);
+    private void initSchedinMed () {
+        progressBar1.setVisibility(View.VISIBLE);
         ArrayList<MedReminder> list = new ArrayList<>();
 
-        Query query = reference.orderByChild("userid").equalTo(firebaseUser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("MedRemind");
+        String userID = firebaseUser.getUid();
+        Query query = reference.orderByChild("userid").equalTo(userID);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange (@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    for (DataSnapshot issue : snapshot.getChildren()){
-                        MedReminder medReminder = issue.getValue(MedReminder.class);
-                        list.add(medReminder);
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        MedReminder medReminder = dataSnapshot.getValue(MedReminder.class);
+                        if(medReminder != null && medReminder.getInStorage()){
+                            list.add(medReminder);
+                        } else binding.inNull.setVisibility(View.VISIBLE);
                     }
 
                     if (list.size() > 0){
                         insideMedi.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                        RecyclerView.Adapter adapter = new PillRemindAdapter(list);
+                        RecyclerView.Adapter adapter = new insideMedAdapter(list);
                         insideMedi.setAdapter(adapter);
+                        binding.inNull.setVisibility(View.GONE);
                     }
 
-                    progressBar.setVisibility(View.GONE);
+                    progressBar1.setVisibility(View.GONE);
                 }
-                progressBar.setVisibility(View.GONE);
+                progressBar1.setVisibility(View.GONE);
             }
 
             @Override
@@ -148,6 +151,45 @@ public class DashboardFragment extends Fragment {
         });
 
     }
+
+    private void initSchedoutMed () {
+        progressBar2.setVisibility(View.VISIBLE);
+        ArrayList<MedReminder> list = new ArrayList<>();
+
+        reference = FirebaseDatabase.getInstance().getReference("MedRemind");
+        String userID = firebaseUser.getUid();
+        Query query = reference.orderByChild("userid").equalTo(userID);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange (@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        MedReminder medReminder = dataSnapshot.getValue(MedReminder.class);
+                        if(medReminder != null && !medReminder.getInStorage()){
+                            list.add(medReminder);
+                        } else binding.outNull.setVisibility(View.VISIBLE);
+                    }
+
+                    if (list.size() > 0){
+                        outsideMedi.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+                        RecyclerView.Adapter adapter = new outsideMedAdapter(list);
+                        outsideMedi.setAdapter(adapter);
+                        binding.outNull.setVisibility(View.GONE);
+                    }
+
+                    progressBar2.setVisibility(View.GONE);
+                }
+                progressBar2.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled (@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
 
     private void DisplayUser () {
         String userName = firebaseUser.getDisplayName();

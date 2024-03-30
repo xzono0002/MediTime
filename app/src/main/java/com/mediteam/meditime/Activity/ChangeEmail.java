@@ -106,12 +106,10 @@ public class ChangeEmail extends AppCompatActivity {
         AuthCredential credential = EmailAuthProvider.getCredential(oldEmailText, passText);
         firebaseUser.reauthenticate(credential).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
-                firebaseUser.updateEmail(newEmailText).addOnCompleteListener(updateTask ->{
+                firebaseUser.verifyBeforeUpdateEmail(newEmailText).addOnCompleteListener(updateTask ->{
                     changeEmail.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
                     if(updateTask.isSuccessful()){
-                        firebaseUser.sendEmailVerification();
-
                         AlertDialog.Builder builder = new AlertDialog.Builder(ChangeEmail.this);
                         View dialogView = getLayoutInflater().inflate(R.layout.change_email_alert, null);
                         builder.setView(dialogView);

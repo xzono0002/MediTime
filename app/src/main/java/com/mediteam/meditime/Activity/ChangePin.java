@@ -122,7 +122,7 @@ public class ChangePin extends AppCompatActivity {
                                   changePIN.setVisibility(View.VISIBLE);
                                   progressBar.setVisibility(View.GONE);
 
-                                  Toast.makeText(ChangePin.this, "Username updated sucessfully!", Toast.LENGTH_LONG).show();
+                                  Toast.makeText(ChangePin.this, "Pin updated sucessfully!", Toast.LENGTH_LONG).show();
                                   Intent intent = new Intent(ChangePin.this, ProfileFragment.class);
                                   intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                                           | Intent.FLAG_ACTIVITY_NEW_TASK);
