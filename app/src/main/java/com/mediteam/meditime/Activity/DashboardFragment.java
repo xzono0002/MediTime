@@ -1,17 +1,23 @@
 package com.mediteam.meditime.Activity;
 
+import static android.content.Intent.getIntent;
+
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,6 +45,9 @@ public class DashboardFragment extends Fragment {
     private DatabaseReference reference;
     private TextView userGreet;
     private FloatingActionButton addMed;
+    private ProgressBar progressBar;
+    private RecyclerView insideMedi, outsideMedi;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +60,8 @@ public class DashboardFragment extends Fragment {
 
         userGreet = root.findViewById(R.id.greetUser);
         addMed = root.findViewById(R.id.addMedic);
+        progressBar = root.findViewById(R.id.dashProgress);
+        insideMedi = root.findViewById(R.id.medView);
 
         addMed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,14 +71,53 @@ public class DashboardFragment extends Fragment {
             }
         });
 
+        CheckForEmailVerified(firebaseUser);
+
         DisplayUser();
         initSchedMed();
-        return  root;
+
+        return root;
+
+    }
+
+    private void CheckForEmailVerified (FirebaseUser user) {
+        if(!user.isEmailVerified()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            View dialogView = getLayoutInflater().inflate(R.layout.verify_alert, null);
+            builder.setView(dialogView);
+
+            Button confirmBTN = dialogView.findViewById(R.id.close_verify);
+            TextView sendEmail = dialogView.findViewById(R.id.resend_email);
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+            confirmBTN.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick (View view) {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            });
+
+            sendEmail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick (View view) {
+                    user.sendEmailVerification();
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private void initSchedMed () {
         reference = FirebaseDatabase.getInstance().getReference("MedRemind");
-        binding.dashProgress.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
         ArrayList<MedReminder> list = new ArrayList<>();
 
         Query query = reference.orderByChild("userid").equalTo(firebaseUser.getUid());
@@ -81,14 +131,14 @@ public class DashboardFragment extends Fragment {
                     }
 
                     if (list.size() > 0){
-                        binding.medView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+                        insideMedi.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                         RecyclerView.Adapter adapter = new PillRemindAdapter(list);
-                        binding.medView.setAdapter(adapter);
+                        insideMedi.setAdapter(adapter);
                     }
 
-                    binding.dashProgress.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
                 }
-                binding.dashProgress.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

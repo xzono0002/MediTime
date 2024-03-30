@@ -70,7 +70,45 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        setVariable();
         return root;
+    }
+
+    private void setVariable () {
+        changeUN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                startActivity( new Intent(getActivity(), ChangeUsername.class) );
+            }
+        });
+
+        changeEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                startActivity(new Intent(getActivity(), ChangeEmail.class));
+            }
+        });
+
+        changePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                startActivity(new Intent(getActivity(), ChangePass.class));
+            }
+        });
+
+        changePin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                startActivity(new Intent(getActivity(), ChangePin.class));
+            }
+        });
+
+        delAcc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                startActivity(new Intent(getActivity(), DeleteAcc.class));
+            }
+        });
     }
 
     public void displayUser(){

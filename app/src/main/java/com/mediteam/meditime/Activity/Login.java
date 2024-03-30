@@ -23,7 +23,7 @@ import com.mediteam.meditime.R;
 
 public class Login extends AppCompatActivity {
 
-    private Button signUp, logIn;
+    private Button signUp, logIn, forgotPass;
     private EditText loginEmail, loginPass;
     private TextView error;
     private ProgressBar progressBar;
@@ -41,6 +41,7 @@ public class Login extends AppCompatActivity {
         logIn = findViewById(R.id.logIn);
         signUp = findViewById(R.id.signupRedirect);
         error = findViewById(R.id.logError);
+        forgotPass = findViewById(R.id.forgotPassword);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +65,14 @@ public class Login extends AppCompatActivity {
                     progressBar.setVisibility(View.VISIBLE);
                     checkUser();
                 }
+            }
+        });
+
+        //open reset password module
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                startActivity(new Intent(Login.this, CheckEmail.class));
             }
         });
     }

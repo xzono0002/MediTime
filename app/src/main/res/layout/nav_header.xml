@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="133dp"
     android:gravity="bottom"
-    android:background="@color/dark10"
+    android:background="@drawable/semi_circle_deco1"
     android:paddingHorizontal="24dp"
     android:theme="@style/Theme.MediTime">
 

@@ -14,13 +14,13 @@
 
         <ProgressBar
             android:id="@+id/profileProgress"
-            style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:indeterminateDrawable="@drawable/progress_bar"/>
 
         <ScrollView
             android:id="@+id/scrollView3"
@@ -35,7 +35,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:visibility="invisible">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -230,7 +230,7 @@
                         android:letterSpacing="0.35"
                         android:text="Delete Account"
                         android:textAllCaps="true"
-                        android:textColor="@color/light10" />
+                        android:textColor="@color/light" />
                 </LinearLayout>
 
             </LinearLayout>

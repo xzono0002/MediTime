@@ -16,10 +16,6 @@
         <item android:title="SETTINGS">
             <menu>
                 <item
-                    android:id="@+id/nav_about"
-                    android:icon="@drawable/about"
-                    android:title="About Developers" />
-                <item
                     android:id="@+id/nav_privacy"
                     android:icon="@drawable/privacy"
                     android:title="Privacy Policy" />

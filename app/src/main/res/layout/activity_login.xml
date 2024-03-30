@@ -121,7 +121,7 @@
                     android:layout_height="20dp"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/error_login"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:letterSpacing="0.05"
                     android:textColor="@color/error"
                     android:visibility="gone"
@@ -142,7 +142,7 @@
                     android:paddingStart="14dp"
                     android:paddingEnd="14dp"
                     android:textColor="@color/dark10"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:letterSpacing="0.05"/>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -167,7 +167,7 @@
                         android:paddingStart="14dp"
                         android:paddingEnd="14dp"
                         android:textColor="@color/dark10"
-                        android:textSize="11sp"
+                        android:textSize="12sp"
                         android:letterSpacing="0.05"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -180,7 +180,7 @@
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/forgot_password"
                     android:textAppearance="@style/shadow"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:layout_gravity="end"
                     android:layout_marginTop="6dp"
                     android:layout_marginEnd="15dp"
@@ -219,7 +219,7 @@
                     android:layout_width="280dp"
                     android:layout_height="48dp"
                     android:background="@drawable/buton"
-                    android:progressTint="@color/light"
+                    android:indeterminateDrawable="@drawable/progress_bar_light"
                     android:paddingVertical="5dp"
                     android:elevation="4dp"
                     android:layout_gravity="center"
@@ -257,7 +257,7 @@
                         android:fontFamily="@font/inter_bold"
                         android:text="@string/or"
                         android:textColor="@color/dark10"
-                        android:textSize="11sp"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView4"
                         app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -295,7 +295,7 @@
                     android:textAllCaps="true"
                     android:textAppearance="@style/shadow"
                     android:textColor="@color/dark10"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
 

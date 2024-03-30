@@ -1,6 +1,7 @@
 package com.mediteam.meditime.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -37,8 +38,6 @@ import java.util.regex.Pattern;
 
 public class AccountCreation extends AppCompatActivity {
 
-    private Pattern pattern;
-    private Matcher matcher;
     private Button createAcc;
     private Button logAcc;
     private EditText signupName, signupEmail, signupUN, signupPass, signupPass2, signupPin;
@@ -95,9 +94,7 @@ public class AccountCreation extends AppCompatActivity {
                 String password = signupPass.getText().toString();
                 String confirmPassword = signupPass2.getText().toString();
 
-                if(!validateField()) {
-
-                } else {
+                if(!validateField()) {} else {
                     if(password.equals(confirmPassword)) {
                         createAcc.setVisibility(View.GONE);
                         progressBar.setVisibility(View.VISIBLE);
@@ -115,7 +112,7 @@ public class AccountCreation extends AppCompatActivity {
         inputChange();
     }
 
-    public void checkPassword(){
+    private void checkPassword(){
         String pass = signupPass.getText().toString();
 
         // password length
@@ -219,16 +216,25 @@ public class AccountCreation extends AppCompatActivity {
                                 createAcc.setVisibility(View.VISIBLE);
                                 progressBar.setVisibility(View.GONE);
 
-                                Toast.makeText(AccountCreation.this, "Signup successful! Please verify your email address.",
-                                        Toast.LENGTH_SHORT).show();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(AccountCreation.this);
+                                View dialogView = getLayoutInflater().inflate(R.layout.signup_alert, null);
+                                builder.setView(dialogView);
 
-                                Intent intent=new Intent(AccountCreation.this, PinModule.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                        | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish();
+                                Button confirmBTN = dialogView.findViewById(R.id.email_close);
+
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+
+                                confirmBTN.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick (View view) {
+                                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                                        intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    }
+                                });
                             } else{
-
                                 Toast.makeText(AccountCreation.this, "Signup failed. Please try again!",
                                         Toast.LENGTH_SHORT).show();
                                 createAcc.setVisibility(View.VISIBLE);

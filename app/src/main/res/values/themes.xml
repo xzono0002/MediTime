@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.MediTime" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:statusBarColor">@color/dark10</item>
+        <item name="android:autofilledHighlight">@color/transparent</item>
     </style>
 
     <style name="shadow">
@@ -20,6 +21,6 @@
 
     <style name="subheader_style" parent="text_style">
         <item name="fontFamily">@font/inter_bold</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 </resources>

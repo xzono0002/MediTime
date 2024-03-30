@@ -28,7 +28,7 @@ import com.mediteam.meditime.R;
 public class PinModule extends AppCompatActivity {
 
     Button pressZero, pressOne, pressTwo, pressThree, pressFour, pressFive, pressSix, pressSeven,
-    pressEight, pressNine, pressBack, forgotPass, signinRed;
+    pressEight, pressNine, pressBack, forgotPin, signinRed;
     EditText pin;
     TextView userGreet;
     ProgressBar progressBar;
@@ -140,7 +140,31 @@ public class PinModule extends AppCompatActivity {
             pressBack.setVisibility(View.INVISIBLE);
         } if (textLen >= 1) {
             pressBack.setVisibility(View.VISIBLE);
-        } if (textLen == pinMaxLen){
+        } if (pin.getText().toString().equals("")){
+            pressOne.setEnabled(true);
+            pressTwo.setEnabled(true);
+            pressThree.setEnabled(true);
+            pressFour.setEnabled(true);
+            pressFive.setEnabled(true);
+            pressSix.setEnabled(true);
+            pressSeven.setEnabled(true);
+            pressEight.setEnabled(true);
+            pressNine.setEnabled(true);
+            pressZero.setEnabled(true);
+            pressBack.setEnabled(true);
+        }
+        if (textLen == pinMaxLen){
+            pressOne.setEnabled(false);
+            pressTwo.setEnabled(false);
+            pressThree.setEnabled(false);
+            pressFour.setEnabled(false);
+            pressFive.setEnabled(false);
+            pressSix.setEnabled(false);
+            pressSeven.setEnabled(false);
+            pressEight.setEnabled(false);
+            pressNine.setEnabled(false);
+            pressZero.setEnabled(false);
+            pressBack.setEnabled(false);
             validateUser();
         }
     }
@@ -209,6 +233,8 @@ public class PinModule extends AppCompatActivity {
                         finish();
                     } else {
                         Toast.makeText(PinModule.this, "You entered the wrong pin. Please try again!", Toast.LENGTH_LONG).show();
+                        pin.setText("");
+                        validatePinLen();
                     }
                 }
             }

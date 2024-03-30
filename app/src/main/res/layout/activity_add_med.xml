@@ -214,8 +214,7 @@
                                 android:background="@drawable/add_med_button_onclick"
                                 android:fontFamily="@font/montserrat_bold"
                                 android:letterSpacing="0.03"
-                                android:paddingHorizontal="24dp"
-                                android:text="In Medi"
+                                android:text="Inside Medi"
                                 android:textAppearance="@style/shadow"
                                 android:textColor="@color/dark10"
                                 android:textSize="12sp" />
@@ -229,8 +228,7 @@
                                 android:background="@drawable/add_med_button_normal"
                                 android:fontFamily="@font/montserrat_bold"
                                 android:letterSpacing="0.03"
-                                android:paddingHorizontal="24dp"
-                                android:text="Out Medi"
+                                android:text="Outside Medi"
                                 android:textAppearance="@style/shadow"
                                 android:textColor="@color/light"
                                 android:textSize="12sp" />

@@ -19,6 +19,24 @@
         android:theme="@style/Theme.MediTime"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.ChangePin"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DeleteAcc"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ChangeEmail"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ChangeUsername"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.CheckEmail"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ChangePass"
+            android:exported="false" />
+        <activity
             android:name=".Activity.EditMed"
             android:exported="false" />
         <activity
