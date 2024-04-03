@@ -1,22 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.PrivacyFragment">
+    tools:context=".Activity.PrivacyFragment"
+    android:orientation="vertical"
+    android:background="@color/light10"
+    android:paddingHorizontal="20dp">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"
-            android:gravity="center"
-            android:layout_gravity="center"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="50dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Privacy Policy for MediTime"
+                android:fontFamily="@font/inter_extrabold"
+                android:letterSpacing="0.05"
+                android:textSize="16sp"
+                android:textColor="@color/dark10"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="1. General"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="14sp"
+                    android:letterSpacing="0.05"
+                    android:textColor="@color/dark10"
+                    android:layout_gravity="start"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:justificationMode="inter_word"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginTop="12dp"
+                    android:text="Thank you for using MediTime. We are committed to maintaining customer privacy through an ethical performance culture that is based on trust, simplicity and confidence. It is one of our core principles to secure customer information while using our mobile applications MediTime (&quot;the app&quot;), and provide privacy protection that is critical in maintaining trust and providing better services. \n
+                    \nThis Policy applies exclusively to information collected within the app, as well as to email and other electronic communications sent by you through or in connection with the app. \n
+                    \nPlease read this policy carefully to understand our policies and practices regarding your information and how we handle it. If you do not agree with our policies and practices, please refrain from downloading, registering or using this app. By downloading, registering or using the app, you agree to abide by this privacy policy."
+                    android:textColor="@color/dark10"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="2. Data Collection and Usage"
+                android:fontFamily="@font/inter_bold"
+                android:textSize="14sp"
+                android:letterSpacing="0.05"
+                android:textColor="@color/dark10"
+                android:layout_gravity="start" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="The Data You Provide to Us"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="12dp"
+                    android:letterSpacing="0.05"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/dark10"
+                    android:layout_gravity="start"/>
+
+                <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:justificationMode="inter_word"
+                android:letterSpacing="0.05"
+                android:fontFamily="@font/inter_medium"
+                android:layout_marginTop="12dp"
+                android:text="We collect your information that you voluntarily provide to us when you use the app, express an interest in obtaining information about us or our apps, when you participate in activities on the app, or send us feedback. The information that we collect depends on the context of your interactions with us and the app. User information we collect may include: email address and user name."
+                android:textColor="@color/dark10"
+                android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Data Usage"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="12dp"
+                    android:letterSpacing="0.05"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/dark10"
+                    android:layout_gravity="start"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:justificationMode="inter_word"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginTop="12dp"
+                    android:text="In the above situation, we guarantee that your information will only be used for contacting you and improving our services. We will never use such information (e.g. your name and email address) for any other purposes, such as to further market our products. We will never disclose your information to a third party for commercial gains, we assure you that we will not share any collected data to Google and that Google will seek prior user consent before any such collection.\n
+                    \nWe may disclose your information to comply with legal requirements, such as responding to a court order or government request. If our application is acquired or merged with another company, your information will be transferred with your consent as part of the transaction."
+                    android:textColor="@color/dark10"
+                    android:textSize="12sp" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="3. Data Security and Storage"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="14sp"
+                    android:letterSpacing="0.05"
+                    android:textColor="@color/dark10"
+                    android:layout_gravity="start"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:justificationMode="inter_word"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginTop="12dp"
+                    android:text="We DO NOT collect any personal data from you when you download and/or use our app. Regarding the automatic information we collect, we only collect it for operating purposes, and we do not retain it. All the data only stored on your Device, your data will be permanently erased by deleting system data or uninstalling Our App."
+                    android:textColor="@color/dark10"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="4. Children's Privacy"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="14sp"
+                    android:letterSpacing="0.05"
+                    android:textColor="@color/dark10"
+                    android:layout_gravity="start"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:justificationMode="inter_word"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginTop="12dp"
+                    android:text="These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13 years of age. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do the necessary actions."
+                    android:textColor="@color/dark10"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="5. Updates to the Privacy Policy"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="14sp"
+                    android:letterSpacing="0.05"
+                    android:textColor="@color/dark10"
+                    android:layout_gravity="start"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:justificationMode="inter_word"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginTop="12dp"
+                    android:text="We may change this privacy policy from time to time. If we do, the date to the policy on our Sites will be updated and will indicate that the policy has been changed. For all users, the change will become effective upon posting. We encourage you to periodically review the privacy policy for the latest information on our privacy practices without prior notice."
+                    android:textColor="@color/dark10"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="6. Contact Details"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="14sp"
+                    android:letterSpacing="0.05"
+                    android:textColor="@color/dark10"
+                    android:layout_gravity="start"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:justificationMode="inter_word"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginTop="12dp"
+                    android:text="We welcome your comments or questions regarding this Privacy Policy. Please email us at:"
+                    android:textColor="@color/dark10"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:justificationMode="inter_word"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/inter_bold"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/SOPH"
+                    android:textColor="@color/dark10"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:justificationMode="inter_word"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/inter_bold"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/ROCHE"
+                    android:textColor="@color/dark10"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:justificationMode="inter_word"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/inter_bold"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/LHOYD"
+                    android:textColor="@color/dark10"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:justificationMode="inter_word"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/inter_bold"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/DON"
+                    android:textColor="@color/dark10"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:justificationMode="inter_word"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/inter_bold"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/JM"
+                    android:textColor="@color/dark10"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
 
     </ScrollView>
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>

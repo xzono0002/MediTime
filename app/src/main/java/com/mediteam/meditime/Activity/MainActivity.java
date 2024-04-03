@@ -2,7 +2,6 @@ package com.mediteam.meditime.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -11,13 +10,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.mediteam.meditime.R;
 
 import java.util.Objects;
@@ -64,18 +60,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
                 profile.setBackgroundResource(R.drawable.account_filled);
                 terms.setBackgroundResource(R.drawable.help_filled);
+                drawerLayout.setBackgroundColor(getResources().getColor(R.color.light10));
                 break;
 
             case R.id.nav_privacy:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PrivacyFragment()).commit();
                 profile.setBackgroundResource(R.drawable.account_filled);
                 terms.setBackgroundResource(R.drawable.help_filled);
+                drawerLayout.setBackgroundColor(getResources().getColor(R.color.light10));
                 break;
 
-            case R.id.nav_contact:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ContactFragment()).commit();
+            case R.id.nav_about:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment()).commit();
                 profile.setBackgroundResource(R.drawable.account_filled);
                 terms.setBackgroundResource(R.drawable.help_filled);
+                drawerLayout.setBackgroundColor(getResources().getColor(R.color.light10));
                 break;
 
             case R.id.nav_logout:
@@ -103,14 +102,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void profile(View view){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
-            profile.setBackgroundResource(R.drawable.account_outline);
-            terms.setBackgroundResource(R.drawable.help_filled);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+        profile.setBackgroundResource(R.drawable.account_outline);
+        terms.setBackgroundResource(R.drawable.help_filled);
+        drawerLayout.setBackgroundColor(getResources().getColor(R.color.light10));
     }
 
     public void details(View view){
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PrivacyFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TutorialFragment()).commit();
         terms.setBackgroundResource(R.drawable.help_outline);
         profile.setBackgroundResource(R.drawable.account_filled);
+        drawerLayout.setBackgroundColor(getResources().getColor(R.color.dark20));
+
     }
 }

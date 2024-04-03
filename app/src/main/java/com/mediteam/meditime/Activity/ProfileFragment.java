@@ -63,8 +63,6 @@ public class ProfileFragment extends Fragment {
         delAcc = root.findViewById(R.id.DeleteAcc);
         progressBar = root.findViewById(R.id.profileProgress);
         profileProgress = root.findViewById(R.id.profileContainer);
-        switchVibrate = root.findViewById(R.id.vibrate);
-        switchSound = root.findViewById(R.id.sound);
 
         userDP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,51 +73,7 @@ public class ProfileFragment extends Fragment {
         });
 
         setVariable();
-        setPreference();
-        loadPreference();
         return root;
-    }
-
-    private void loadPreference () {
-        String userID = firebaseUser.getUid();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("UserPreference").child(userID);
-
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange (@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String vibrateValue = snapshot.child("vibrate").getValue(String.class);
-                    String soundValue = snapshot.child("sound").getValue(String.class);
-
-                    // Update switch states based on database values
-                    if (vibrateValue != null && vibrateValue.equals("true")) {
-                        switchVibrate.setChecked(true);
-                    }
-
-                    if (soundValue != null && soundValue.equals("true")) {
-                        switchSound.setChecked(true);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled (@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void setPreference () {
-        String userID = firebaseUser.getUid();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("UserPreference").child(userID);
-
-        switchVibrate.setOnCheckedChangeListener((buttonView, isChecked) ->{
-            reference.child("vibrate").setValue(isChecked ? "true" : "false");
-        });
-
-        switchSound.setOnCheckedChangeListener((buttonView, isChecked) ->{
-            reference.child("sound").setValue(isChecked ? "true" : "false");
-        });
     }
 
     private void setVariable () {

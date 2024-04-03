@@ -10,7 +10,7 @@
     app:behavior_peekHeight="0dp"
     android:paddingHorizontal="20dp"
     android:paddingTop="15dp"
-    android:paddingBottom="30dp"
+    android:paddingBottom="50dp"
     android:background="@drawable/bottom_nav_bg">
 
     <LinearLayout
@@ -60,7 +60,7 @@
                 android:id="@+id/everyday_table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="30dp"
                 android:orientation="vertical">
 
                 <LinearLayout

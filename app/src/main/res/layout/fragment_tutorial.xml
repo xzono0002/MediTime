@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.TutorialFragment"
+    android:background="@color/dark20"
+    android:paddingHorizontal="20dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="40dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="How to use MediTime App"
+                android:fontFamily="@font/inter_extrabold"
+                android:letterSpacing="0.05"
+                android:textSize="16sp"
+                android:textColor="@color/light"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="250dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:src="@drawable/dashboard_ss" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:justificationMode="inter_word"
+                        android:letterSpacing="0.05"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="This is your dashboard where you can see all the medication you input in the application."
+                        android:textColor="@color/light"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:justificationMode="inter_word"
+                        android:letterSpacing="0.05"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="If you click this + sign, you can see the next frame."
+                        android:textColor="@color/light"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/inter_medium"
+                android:justificationMode="inter_word"
+                android:letterSpacing="0.05"
+                android:layout_marginEnd="12dp"
+                android:text="This is where you can add your new medication. You should enter your medication details like:
+                \n
+                \n\u2022 Names and dosages of the medication.
+                \n\u2022 How many pills you refilled (If none, just type 0).
+                \n\u2022 Choose between Inside or Outside MediTime as a type of storage you want.
+                \n\u2022 Select what tube is available.
+                \n\u2022 Choose between every day or selected day as a schedule.
+                \n\u2022 Add notes as an additional reminder."
+                android:textColor="@color/light"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_weight="1"
+                android:src="@drawable/add_med_ss"
+                android:layout_gravity="start"/>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@color/dark10"
+                android:padding="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:justificationMode="inter_word"
+                        android:letterSpacing="0.05"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="When you click EVERYDAY or SELECTED DAY, this frame will appear. You need to put what DAY, TIME and HOW MANY PILLS you need to take per day."
+                        android:textColor="@color/light"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:justificationMode="inter_word"
+                        android:letterSpacing="0.05"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="Click ADD NEW TIME,  if you want to add another schedule."
+                        android:textColor="@color/light"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:justificationMode="inter_word"
+                        android:letterSpacing="0.05"
+                        android:text="Click OK if you are done."
+                        android:textColor="@color/light"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/add_sched_ss" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="30dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:justificationMode="inter_word"
+                        android:letterSpacing="0.05"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="Click on the SAVE icon if you are done filling up all the required information."
+                        android:textColor="@color/light"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="0.5"
+                    android:src="@drawable/check_circle" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -63,6 +63,7 @@ public class AddMed extends AppCompatActivity {
     private int pills;
     private boolean tabletSelected = false, capsuleSelected = false, everydaySelected = false, customSelected = false, insideMedi = true, outsideMedi = false;
     MedReminder medReminder;
+    private int requestCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -347,6 +348,7 @@ public class AddMed extends AppCompatActivity {
                             scheduleItem.setPillQuantities(pills);
 
                             setEverydayAlarm(hour, minute, key, everydayKey);
+                            databaseReference.child(key).child("schedule").child(everydayKey).child("requestCode").setValue(requestCode);
 
                         }
                     }
@@ -405,7 +407,7 @@ public class AddMed extends AppCompatActivity {
         intent.putExtra("childKey", childKey);
 
        // Generate a unique request code based on reminderKey and childKey
-       int requestCode = (reminderKey + childKey).hashCode();
+       requestCode = (reminderKey + childKey).hashCode();
 
        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
