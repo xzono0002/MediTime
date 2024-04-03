@@ -39,8 +39,6 @@ public class insideMedAdapter extends RecyclerView.Adapter<insideMedAdapter.view
 
         holder.itemView.setOnClickListener(view -> {
            Intent intent = new Intent(context, InScheduleReceipt.class);
-           intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    | Intent.FLAG_ACTIVITY_NEW_TASK);
            intent.putExtra("object", items.get(position));
            context.startActivity(intent);
         });

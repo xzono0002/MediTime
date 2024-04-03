@@ -157,6 +157,14 @@ public class InScheduleReceipt extends AppCompatActivity {
                     }
                 });
 
+                options.findViewById(R.id.dispense_all).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick (View view) {
+                        reference = FirebaseDatabase.getInstance().getReference("ServoBehavior"). child("dispenseAll");
+                        reference.child("servoAngle").setValue(100);
+                    }
+                });
+
                 options.findViewById(R.id.delete_btn).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick (View view) {
@@ -182,9 +190,11 @@ public class InScheduleReceipt extends AppCompatActivity {
                                     @Override
                                     public void onSuccess (Void unused) {
                                         //Deletion succesfull
-                                        cancelAlarm(itemKey, childKey);
+//                                        cancelAlarm(itemKey, childKey);
                                         Toast.makeText(InScheduleReceipt.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(InScheduleReceipt.this, MainActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                                | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish();
                                     }

@@ -409,16 +409,21 @@ public class AddMed extends AppCompatActivity {
 
        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, hours);
-        calendar.set(Calendar.MINUTE, minutes);
-        calendar.set(Calendar.SECOND, 0);
+       Calendar calendar = Calendar.getInstance();
+       calendar.set(Calendar.HOUR_OF_DAY, hours);
+       calendar.set(Calendar.MINUTE, minutes);
+       calendar.set(Calendar.SECOND, 0);
 
-       if(calendar.getTimeInMillis() <= System.currentTimeMillis()){
-           calendar.add(Calendar.DAY_OF_YEAR, 1);
+       // If the specified time for today has already passed, set the alarm for the same time tomorrow
+       if (System.currentTimeMillis() > calendar.getTimeInMillis()){
+           calendar.add(Calendar.DAY_OF_YEAR, 1); // Add one day to set the alarm for tomorrow
        }
 
-       alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+       // Set the alarm to repeat every day at the specified time
+       alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+               calendar.getTimeInMillis(),
+               AlarmManager.INTERVAL_DAY,
+               pendingIntent);
 
     }
 
@@ -601,7 +606,9 @@ public class AddMed extends AppCompatActivity {
                             }
                         } else {
                             ampm = "PM";
-                            hours = hours - 12;
+                            if(hours != 12) {
+                                hours = hours - 12;
+                            }
                         }
                         everydaySetTime.setText(String.format(Locale.getDefault(), "%02d:%02d %s", hours, minutes, ampm));
 
@@ -621,6 +628,10 @@ public class AddMed extends AppCompatActivity {
                 int pillQuantity = Integer.parseInt(everydayPill.getText().toString());
                 pillQuantity++;
                 everydayPill.setText(String.valueOf(pillQuantity));
+
+                if(pillQuantity >= 2){
+                    minusPill.setEnabled(true);
+                }
             }
         });
 
@@ -633,6 +644,10 @@ public class AddMed extends AppCompatActivity {
                 int pillQuantity = Integer.parseInt(everydayPill.getText().toString());
                 pillQuantity--;
                 everydayPill.setText(String.valueOf(pillQuantity));
+
+                if(pillQuantity == 1){
+                    minusPill.setEnabled(false);
+                }
             }
         });
 
@@ -709,11 +724,15 @@ public class AddMed extends AppCompatActivity {
                 int pillQuantity = Integer.parseInt(customPill.getText().toString());
                 pillQuantity++;
                 customPill.setText(String.valueOf(pillQuantity));
+                if(pillQuantity >= 2){
+                    minusPill.setEnabled(true);
+                }
             }
         });
 
         //When minusPill button is clicked, pill quantity of the instance decreases
         minusPill = newCustomRow.findViewById(R.id.custom_pill_minus);
+
         minusPill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
@@ -721,6 +740,10 @@ public class AddMed extends AppCompatActivity {
                 int pillQuantity = Integer.parseInt(customPill.getText().toString());
                 pillQuantity--;
                 customPill.setText(String.valueOf(pillQuantity));
+
+                if(pillQuantity == 1){
+                    minusPill.setEnabled(false);
+                }
             }
         });
 

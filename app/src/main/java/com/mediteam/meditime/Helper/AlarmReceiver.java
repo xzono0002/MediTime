@@ -31,6 +31,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.logo_notif);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "med_channel")
+                .setCategory(NotificationCompat.CATEGORY_ALARM)
                 .setSmallIcon(R.drawable.logo_notif_small)
                 .setContentTitle(title)
                 .setContentText(message)

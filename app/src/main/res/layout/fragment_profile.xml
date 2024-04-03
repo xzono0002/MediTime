@@ -102,20 +102,6 @@
                         android:textSize="12sp" />
 
                     <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/alarm"
-                        style="@style/shadow"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:fontFamily="@font/inter_extrabold"
-                        android:letterSpacing="0.35"
-                        android:text="Alarm"
-                        android:textColor="@color/dark10"
-                        android:textSize="15sp"
-                        android:thumb="@drawable/thumb"
-                        app:track="@drawable/track" />
-
-                    <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/vibrate"
                         style="@style/shadow"
                         android:layout_width="match_parent"
@@ -142,6 +128,7 @@
                         android:textSize="15sp"
                         android:thumb="@drawable/thumb"
                         app:track="@drawable/track" />
+
                 </LinearLayout>
 
                 <LinearLayout

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -35,6 +36,7 @@ public class ProfileFragment extends Fragment {
     FirebaseUser firebaseUser;
     private DatabaseReference reference;
     private TextView userFN, userUN;
+    private SwitchCompat switchVibrate, switchSound;
     private CircleImageView userDP;
     private LinearLayout profileProgress;
     private ProgressBar progressBar;
@@ -61,6 +63,8 @@ public class ProfileFragment extends Fragment {
         delAcc = root.findViewById(R.id.DeleteAcc);
         progressBar = root.findViewById(R.id.profileProgress);
         profileProgress = root.findViewById(R.id.profileContainer);
+        switchVibrate = root.findViewById(R.id.vibrate);
+        switchSound = root.findViewById(R.id.sound);
 
         userDP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,10 +75,55 @@ public class ProfileFragment extends Fragment {
         });
 
         setVariable();
+        setPreference();
+        loadPreference();
         return root;
     }
 
+    private void loadPreference () {
+        String userID = firebaseUser.getUid();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("UserPreference").child(userID);
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange (@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String vibrateValue = snapshot.child("vibrate").getValue(String.class);
+                    String soundValue = snapshot.child("sound").getValue(String.class);
+
+                    // Update switch states based on database values
+                    if (vibrateValue != null && vibrateValue.equals("true")) {
+                        switchVibrate.setChecked(true);
+                    }
+
+                    if (soundValue != null && soundValue.equals("true")) {
+                        switchSound.setChecked(true);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled (@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void setPreference () {
+        String userID = firebaseUser.getUid();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("UserPreference").child(userID);
+
+        switchVibrate.setOnCheckedChangeListener((buttonView, isChecked) ->{
+            reference.child("vibrate").setValue(isChecked ? "true" : "false");
+        });
+
+        switchSound.setOnCheckedChangeListener((buttonView, isChecked) ->{
+            reference.child("sound").setValue(isChecked ? "true" : "false");
+        });
+    }
+
     private void setVariable () {
+
         changeUN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
@@ -109,6 +158,8 @@ public class ProfileFragment extends Fragment {
                 startActivity(new Intent(getActivity(), DeleteAcc.class));
             }
         });
+
+
     }
 
     public void displayUser(){

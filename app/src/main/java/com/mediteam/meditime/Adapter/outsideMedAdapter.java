@@ -39,8 +39,6 @@ public class outsideMedAdapter extends RecyclerView.Adapter<outsideMedAdapter.vi
 
         holder.itemView.setOnClickListener(view -> {
            Intent intent = new Intent(context, OutScheduleReceipt.class);
-           intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    | Intent.FLAG_ACTIVITY_NEW_TASK);
            intent.putExtra("object", items.get(position));
            context.startActivity(intent);
         });
