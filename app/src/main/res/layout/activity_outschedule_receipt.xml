@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.InScheduleReceipt"
+    tools:context=".Activity.OutScheduleReceipt"
     android:background="@color/light10">
 
     <ScrollView
@@ -49,18 +49,18 @@
                         android:letterSpacing="0.09"
                         style="@style/shadow"/>
 
-                    <TextView
-                        android:id="@+id/editMedi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="EDIT"
-                        android:fontFamily="@font/inter_bold"
-                        android:textColor="@color/light"
-                        android:textSize="15sp"
-                        android:letterSpacing="0.09"
-                        style="@style/shadow"
-                        android:layout_marginEnd="20dp"
-                        android:background="@color/transparent"/>
+<!--                    <TextView-->
+<!--                        android:id="@+id/editMedi"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="EDIT"-->
+<!--                        android:fontFamily="@font/inter_bold"-->
+<!--                        android:textColor="@color/light"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:letterSpacing="0.09"-->
+<!--                        style="@style/shadow"-->
+<!--                        android:layout_marginEnd="20dp"-->
+<!--                        android:background="@color/transparent"/>-->
 
                 </LinearLayout>
 

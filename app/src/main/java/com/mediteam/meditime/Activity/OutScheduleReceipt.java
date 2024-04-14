@@ -163,12 +163,12 @@ public class OutScheduleReceipt extends AppCompatActivity {
             everyday.setVisibility(View.GONE);
         }
 
-        binding.editMedi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View view) {
-                startActivity(new Intent(OutScheduleReceipt.this, EditMed.class));
-            }
-        });
+//        binding.editMedi.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick (View view) {
+//                startActivity(new Intent(OutScheduleReceipt.this, EditMed.class));
+//            }
+//        });
 
         binding.optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
