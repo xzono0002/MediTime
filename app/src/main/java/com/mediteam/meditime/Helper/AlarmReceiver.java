@@ -26,7 +26,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Create and show the notification
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Uri soundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.meditime);
+        Uri soundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.meditime_notif);
         Log.d("Notification", "soundURI: " + soundUri.toString());
         Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.logo_notif);
 

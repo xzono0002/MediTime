@@ -160,6 +160,7 @@ public class InScheduleReceipt extends AppCompatActivity {
                 options.findViewById(R.id.dispense_all).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick (View view) {
+                        String requestID = object.getMedId();
                         reference = FirebaseDatabase.getInstance().getReference("ServoBehavior"). child("dispenseAll");
                         reference.child("servoAngle").setValue(100);
                     }
