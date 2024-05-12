@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.InScheduleReceipt"
+    android:background="@color/light10">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/toolbar"
+                android:paddingHorizontal="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:id="@+id/backHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/back_ios"
+                        android:background="@color/transparent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="DETAILS"
+                        android:textAlignment="textStart"
+                        android:layout_marginStart="7.5dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:textSize="15sp"
+                        android:textColor="@color/light"
+                        android:letterSpacing="0.09"
+                        style="@style/shadow"/>
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/editMedi"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="EDIT"-->
+<!--                        android:fontFamily="@font/inter_bold"-->
+<!--                        android:textColor="@color/light"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:letterSpacing="0.09"-->
+<!--                        style="@style/shadow"-->
+<!--                        android:layout_marginEnd="20dp"-->
+<!--                        android:background="@color/transparent"/>-->
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="100dp">
+
+                <TextView
+                    android:id="@+id/medTitle"
+                    android:background="@drawable/receipt_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="12sp"
+                    android:textColor="@color/light"
+                    android:letterSpacing="0.01"
+                    android:paddingVertical="7dp"
+                    android:paddingHorizontal="30dp"
+                    android:layout_gravity="center"
+                    style="@style/shadow"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginBottom="21dp"/>
+
+                <LinearLayout
+                    android:id="@+id/detail_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="18dp"
+                        android:paddingVertical="24dp"
+                        android:background="@drawable/receipt_bg">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="REFILLED PILLS"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="12sp"
+                                android:textColor="@color/light"
+                                android:letterSpacing="0.05"
+                                style="@style/shadow"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="TUBE"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="12sp"
+                                android:textColor="@color/light"
+                                android:letterSpacing="0.05"
+                                style="@style/shadow"
+                                android:layout_marginVertical="18dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="DOSAGE FORM"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="12sp"
+                                android:textColor="@color/light"
+                                android:letterSpacing="0.05"
+                                style="@style/shadow"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="SCHEDULE"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="12sp"
+                                android:textColor="@color/light"
+                                android:letterSpacing="0.05"
+                                style="@style/shadow"
+                                android:layout_marginVertical="18dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="TYPE OF STORAGE"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="12sp"
+                                android:textColor="@color/light"
+                                android:letterSpacing="0.05"
+                                style="@style/shadow"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="40dp">
+
+                            <TextView
+                                android:id="@+id/refilled_pills"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="true"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="12sp"
+                                android:textColor="@color/light"
+                                android:letterSpacing="0.05"
+                                style="@style/shadow"/>
+
+                            <TextView
+                                android:id="@+id/tubes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="true"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="12sp"
+                                android:textColor="@color/light"
+                                android:letterSpacing="0.05"
+                                style="@style/shadow"
+                                android:layout_marginVertical="18dp"/>
+
+                            <TextView
+                                android:id="@+id/dos_form"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="true"
+                                android:text="TABLET"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="12sp"
+                                android:textColor="@color/light"
+                                android:letterSpacing="0.05"
+                                style="@style/shadow"/>
+
+                            <TextView
+                                android:id="@+id/sched"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="true"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="12sp"
+                                android:textColor="@color/light"
+                                android:letterSpacing="0.05"
+                                style="@style/shadow"
+                                android:layout_marginVertical="18dp"/>
+
+                            <TextView
+                                android:id="@+id/storage"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="INSIDE MEDITIME"
+                                android:textAllCaps="true"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="12sp"
+                                android:textColor="@color/light"
+                                android:letterSpacing="0.05"
+                                style="@style/shadow"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="18dp"
+                        android:paddingVertical="24dp"
+                        android:background="@drawable/receipt_bg"
+                        android:layout_marginVertical="24dp">
+
+                        <LinearLayout
+                            android:id="@+id/everyday_table"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/everyday_table_row"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:orientation="horizontal"
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:gravity="center">
+
+                                <TextView
+                                    style="@style/shadow"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:letterSpacing="0.05"
+                                    android:text="TIME INTAKE"
+                                    android:gravity="center"
+                                    android:textColor="@color/light"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    style="@style/shadow"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:letterSpacing="0.05"
+                                    android:layout_marginStart="40dp"
+                                    android:text="NO. OF PILLS"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/light"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/custom_table_row"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:orientation="horizontal"
+                                android:visibility="gone"
+                                android:gravity="center"
+                                android:layout_gravity="center">
+
+                                <TextView
+                                    style="@style/shadow"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:letterSpacing="0.05"
+                                    android:text="EVERY"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/light"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    style="@style/shadow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:layout_marginHorizontal="20dp"
+                                    android:letterSpacing="0.05"
+                                    android:textAlignment="center"
+                                    android:text="TIME INTAKE"
+                                    android:textColor="@color/light"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    style="@style/shadow"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:letterSpacing="0.05"
+                                    android:text="NO. OF PILLS"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/light"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/sched_med"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="18dp"
+                        android:paddingVertical="24dp"
+                        android:background="@drawable/receipt_bg">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="NOTES"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/light"
+                            android:letterSpacing="0.05"
+                            style="@style/shadow"
+                            android:layout_marginBottom="10dp"/>
+
+                        <TextView
+                            android:id="@+id/note"
+                            style="@style/shadow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:letterSpacing="0.05"
+                            android:textColor="@color/light"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/dark10"
+        android:layout_gravity="bottom"
+        android:gravity="end"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/options_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/options"
+            android:background="@color/transparent"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/options"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

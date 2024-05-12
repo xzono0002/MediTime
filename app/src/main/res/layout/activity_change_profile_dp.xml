@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.ChangeProfileDP"
+    android:background="@color/light10"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:background="@drawable/toolbar"
+        android:paddingHorizontal="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start">
+
+            <ImageButton
+                android:id="@+id/backProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/back_ios"
+                android:onClick="profile"
+                android:elevation="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_extrabold"
+                android:text="GO BACK"
+                android:textColor="@color/light"
+                android:textSize="15sp"
+                android:letterSpacing="0.09"
+                style="@style/shadow"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginVertical="48dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="Upload your Display Picture"
+                android:textAlignment="center"
+                android:textColor="@color/dark"
+                android:textSize="16sp"
+                android:letterSpacing="0.15"
+                style="@style/shadow"/>
+
+
+            <Button
+                android:id="@+id/openFile"
+                android:layout_width="223dp"
+                android:layout_height="33dp"
+                android:background="@drawable/buton"
+                android:layout_marginTop="33dp"
+                android:text="CHOOSE FILE"
+                android:fontFamily="@font/inter_extrabold"
+                android:textSize="15sp"
+                android:letterSpacing="0.35"
+                android:textColor="@color/dark10"
+                style="@style/shadow"
+                android:elevation="10dp"/>
+
+            <ImageView
+                android:id="@+id/dpView"
+                android:layout_width="293dp"
+                android:layout_height="293dp"
+                android:layout_marginTop="21dp" />
+
+            <Button
+                android:id="@+id/uploadFile"
+                android:layout_width="223dp"
+                android:layout_height="33dp"
+                android:background="@drawable/buton"
+                android:layout_marginTop="21dp"
+                android:text="UPLOAD PHOTO"
+                android:fontFamily="@font/inter_extrabold"
+                android:textSize="15sp"
+                android:letterSpacing="0.35"
+                android:textColor="@color/dark10"
+                style="@style/shadow"
+                android:elevation="10dp"/>
+            
+            <ProgressBar
+                android:id="@+id/uploadProgress"
+                android:layout_width="223dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="21dp"
+                android:background="@drawable/buton"
+                android:progressTint="@color/light"
+                android:paddingVertical="5dp"
+                android:elevation="10dp"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

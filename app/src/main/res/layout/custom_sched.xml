@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/custom_sched_misc"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxHeight="370dp"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    app:behavior_peekHeight="0dp"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="50dp"
+    android:background="@drawable/bottom_nav_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/custom_ok"
+            android:layout_width="40dp"
+            android:layout_height="17dp"
+            android:text="OK"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="14sp"
+            android:textColor="@color/light"
+            android:letterSpacing=".2"
+            style="@style/shadow"
+            android:background="@color/transparent" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/custom_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Custom Schedule"
+                android:fontFamily="@font/inter_extrabold"
+                android:textSize="16sp"
+                android:textColor="@color/light"
+                android:letterSpacing=".05"
+                style="@style/shadow"
+                android:layout_marginBottom="20dp"/>
+
+            <LinearLayout
+                android:id="@+id/custom_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        style="@style/shadow"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:letterSpacing="0.05"
+                        android:text="Day"
+                        android:textColor="@color/light"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        style="@style/shadow"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:letterSpacing="0.05"
+                        android:text="Time"
+                        android:textColor="@color/light"
+                        android:textSize="12sp"
+                        android:layout_marginHorizontal="33dp"/>
+
+                    <TextView
+                        style="@style/shadow"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:letterSpacing="0.05"
+                        android:text="No. of pills"
+                        android:textColor="@color/light"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/new_custom_sched"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:background="@drawable/buton"
+                android:text="ADD NEW TIME"
+                android:fontFamily="@font/inter_extrabold"
+                android:textSize="10sp"
+                android:textColor="@color/dark10"
+                android:letterSpacing=".15"
+                style="@style/shadow"
+                android:paddingStart="3dp"
+                android:paddingEnd="10dp"
+                android:drawableStart="@drawable/add_new_sched_btn_normal"
+                android:drawablePadding="6dp"
+                android:gravity="center"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

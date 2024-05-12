@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="297dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingVertical="23dp"
+    android:paddingHorizontal="15dp"
+    android:background="@drawable/alert_bg"
+    android:layout_gravity="center">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email Sent!"
+        android:fontFamily="@font/inter_extrabold"
+        android:textSize="20sp"
+        android:textColor="@color/dark10"
+        style="@style/shadow"
+        android:letterSpacing="0.05"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:text="Please check your email to verify your account."
+        android:fontFamily="@font/inter_bold"
+        android:textSize="12sp"
+        android:textColor="@color/dark"
+        style="@style/shadow"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/email_alert_close"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:background="@drawable/buton"
+            android:backgroundTint="@color/dark20"
+            android:text="I UNDERSTAND"
+            android:fontFamily="@font/inter_extrabold"
+            android:textColor="@color/light"
+            android:letterSpacing="0.15"
+            style="@style/shadow"
+            android:textSize="12sp"
+            android:paddingHorizontal="14dp"/>
+
+    </LinearLayout>
+</LinearLayout>

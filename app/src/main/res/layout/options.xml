@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/options_misc"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxHeight="370dp"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    app:behavior_peekHeight="0dp"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="30dp"
+    android:background="@drawable/bottom_nav_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="14sp"
+            android:textColor="@color/light"
+            android:letterSpacing=".2"
+            style="@style/shadow"
+            android:gravity="start"
+            android:background="@color/transparent"/>
+    </LinearLayout>
+
+
+    <ScrollView
+        android:id="@+id/everyday_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Options"
+                android:fontFamily="@font/inter_extrabold"
+                android:textSize="16sp"
+                android:textColor="@color/light"
+                android:letterSpacing=".05"
+                style="@style/shadow"
+                android:layout_marginBottom="20dp"/>
+            
+            <Button
+                android:id="@+id/dispense_all"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="DISPENSE ALL MEDICINE"
+                android:letterSpacing="0.1"
+                android:fontFamily="@font/inter_extrabold"
+                android:textSize="14sp"
+                android:textColor="@color/light"
+                style="@style/shadow"
+                android:background="@drawable/options_btn"
+                android:layout_marginBottom="15dp"/>
+
+            <Button
+                android:id="@+id/delete_btn"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="DELETE"
+                android:letterSpacing="0.1"
+                android:fontFamily="@font/inter_extrabold"
+                android:textSize="14sp"
+                android:textColor="@color/light"
+                style="@style/shadow"
+                android:background="@drawable/options_btn" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

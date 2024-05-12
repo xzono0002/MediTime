@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light10"
+    android:paddingHorizontal="20dp"
+    tools:context=".Activity.AboutFragment"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="50dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="About MediTime"
+                android:fontFamily="@font/inter_extrabold"
+                android:letterSpacing="0.05"
+                android:textSize="16sp"
+                android:textColor="@color/dark10"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:justificationMode="inter_word"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="In 2024, the developer created this application called MediTime. This was made to help the users to improve their medication adherence. This program serves as a reminder for the medicine you need to intake and gives guidance on what you need to do.\n
+                    \nMediTime aims to increase medicine adherence, lower the chance of medication errors, and give consumers more control over their health. The goal of MediTime is to give people the tools they need to take charge of their health and make sure they take the proper medication at the right time."
+                    android:textColor="@color/dark10"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

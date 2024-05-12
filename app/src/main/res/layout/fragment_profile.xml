@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activity.ProfileFragment"
+    android:background="@color/light10"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/profileProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:indeterminateDrawable="@drawable/progress_bar"/>
+
+        <ScrollView
+            android:id="@+id/scrollView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/profileContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/userDP"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:civ_border_color="@color/dark20"
+                        app:civ_border_width="2dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/userFN"
+                            style="@style/shadow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_extrabold"
+                            android:letterSpacing="0.15"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="true"
+                            android:textColor="@color/dark10"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/userUN"
+                            style="@style/shadow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:letterSpacing="0.15"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/dark10"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/shadow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:letterSpacing="0.35"
+                        android:text="Account Settings"
+                        android:textAllCaps="true"
+                        android:textColor="@color/dark10"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/changeUN"
+                        style="@style/shadow"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/buton"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/inter_extrabold"
+                        android:letterSpacing="0.35"
+                        android:text="Change username"
+                        android:textAllCaps="true"
+                        android:textColor="@color/dark10" />
+
+                    <Button
+                        android:id="@+id/changeEmail"
+                        style="@style/shadow"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_marginVertical="25dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/buton"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/inter_extrabold"
+                        android:letterSpacing="0.35"
+                        android:text="Change email"
+                        android:textAllCaps="true"
+                        android:textColor="@color/dark10" />
+
+                    <Button
+                        android:id="@+id/changePass"
+                        style="@style/shadow"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@drawable/buton"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/inter_extrabold"
+                        android:letterSpacing="0.35"
+                        android:text="Change password"
+                        android:textAllCaps="true"
+                        android:textColor="@color/dark10" />
+
+                    <Button
+                        android:id="@+id/changePin"
+                        style="@style/shadow"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_marginVertical="25dp"
+                        android:background="@drawable/buton"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/inter_extrabold"
+                        android:letterSpacing="0.35"
+                        android:text="Change pin"
+                        android:textAllCaps="true"
+                        android:textColor="@color/dark10" />
+
+                    <Button
+                        android:id="@+id/DeleteAcc"
+                        style="@style/shadow"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@drawable/buton"
+                        android:backgroundTint="@color/error"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/inter_extrabold"
+                        android:letterSpacing="0.35"
+                        android:text="Delete Account"
+                        android:textAllCaps="true"
+                        android:textColor="@color/light" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</FrameLayout>
