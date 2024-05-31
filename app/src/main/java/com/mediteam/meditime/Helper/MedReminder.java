@@ -1,19 +1,17 @@
 package com.mediteam.meditime.Helper;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class MedReminder implements Serializable {
-    private String Userid;
+    private String userId;
     private String medId;
     private String medicine;
-    private String pillsOnTube;
+    private int pillsOnTube;
     private String notes;
-    private String tubeSelection;
+    private int tubeSelection;
     private String pillForm;
-    private String repeat;
+    private String repeatStyle;
     private Boolean inStorage;
 
     private Map<String, ScheduleItem> schedule;
@@ -26,12 +24,12 @@ public class MedReminder implements Serializable {
         return medicine;
     }
 
-    public String getUserid () {
-        return Userid;
+    public String getUserId () {
+        return userId;
     }
 
-    public void setUserid (String userid) {
-        Userid = userid;
+    public void setUserId (String userId) {
+        this.userId = userId;
     }
 
     public String getMedId () {
@@ -42,11 +40,11 @@ public class MedReminder implements Serializable {
         this.medId = medId;
     }
 
-    public String getPillsOnTube () {
+    public int getPillsOnTube () {
         return pillsOnTube;
     }
 
-    public void setPillsOnTube (String pillsOnTube) {
+    public void setPillsOnTube (int pillsOnTube) {
         this.pillsOnTube = pillsOnTube;
     }
 
@@ -66,11 +64,11 @@ public class MedReminder implements Serializable {
         this.medicine = medicine;
     }
 
-    public String getTubeSelection () {
+    public int getTubeSelection () {
         return tubeSelection;
     }
 
-    public void setTubeSelection (String tubeSelection) {
+    public void setTubeSelection (int tubeSelection) {
         this.tubeSelection = tubeSelection;
     }
 
@@ -82,12 +80,12 @@ public class MedReminder implements Serializable {
         this.pillForm = pillForm;
     }
 
-    public String getRepeat () {
-        return repeat;
+    public String getRepeatStyle () {
+        return repeatStyle;
     }
 
-    public void setRepeat (String repeat) {
-        this.repeat = repeat;
+    public void setRepeatStyle (String repeatStyle) {
+        this.repeatStyle = repeatStyle;
     }
 
     public Boolean getInStorage() {

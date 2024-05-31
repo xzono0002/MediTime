@@ -1,6 +1,5 @@
 package com.mediteam.meditime.Activity;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -13,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +40,8 @@ import java.util.ArrayList;
 public class OutScheduleReceipt extends AppCompatActivity {
     ActivityOutscheduleReceiptBinding binding;
     DatabaseReference reference;
+    private FirebaseAuth mAuth;
+    private FirebaseUser firebaseUser;
     MedReminder object;
     private int num = 1;
     private String childKey;
@@ -50,6 +52,9 @@ public class OutScheduleReceipt extends AppCompatActivity {
         binding = ActivityOutscheduleReceiptBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
+
         getIntentExtra();
         fetchKeys();
         setVariable();
@@ -58,50 +63,103 @@ public class OutScheduleReceipt extends AppCompatActivity {
 
     private void innitSched () {
         String requestID = object.getMedId();
+        String userID = firebaseUser.getUid();
 
-        Query reference = FirebaseDatabase.getInstance().getReference("MedRemind").child(requestID);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("MedRemind").child(userID).child(requestID);
 
-        reference.orderByChild("schedule").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange (@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    ArrayList<ScheduleItem> list = new ArrayList<>();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Log.d("initSched", "Snapshot exists: " + snapshot.getValue().toString());
 
-                    for (DataSnapshot childSnapshot : snapshot.child("schedule").getChildren()) {
-                        String days = childSnapshot.child("days").getValue(String.class);
-                        String times = childSnapshot.child("times").getValue(String.class);
-                        Integer pillQuantitiesObject = childSnapshot.child("pillQuantities").getValue(Integer.class);
+                    DataSnapshot scheduleSnapshot = snapshot.child("schedule");
+                    if (scheduleSnapshot.exists()) {
+                        ArrayList<ScheduleItem> list = new ArrayList<>();
 
-                        // Check if pillQuantitiesObject is null
-                        int pillQuantities = (pillQuantitiesObject != null) ? pillQuantitiesObject.intValue() : 0;
+                        for (DataSnapshot childSnapshot : scheduleSnapshot.getChildren()) {
+                            Log.d("initSched", "Processing schedule child: " + childSnapshot.getKey());
 
-                        ScheduleItem scheduleItem = new ScheduleItem();
+                            Long repeat = childSnapshot.child("repeat").getValue(Long.class); // repeat is a number
+                            String times = childSnapshot.child("times").getValue(String.class);
+                            Integer pillQuantitiesObject = childSnapshot.child("pillQuantities").getValue(Integer.class);
 
-                        scheduleItem.setDay(days);
-                        scheduleItem.setTime(times);
-                        scheduleItem.setPillQuantities(pillQuantities);
+                            // Check if any value is null
+                            if (repeat != null && times != null && pillQuantitiesObject != null) {
+                                int pillQuantities = pillQuantitiesObject;
+                                // Extract hours and minutes from the time string
+                                String[] timeParts = times.split(":");
 
-                        list.add(scheduleItem);
+                                int hour = Integer.parseInt(timeParts[0]);
+                                int minute = Integer.parseInt(timeParts[1]);
+
+                                String ampm;
+                                if (hour < 12) {
+                                    ampm = "AM";
+                                    if (hour == 0) {
+                                        hour = 12;  // midnight
+                                    }
+                                } else {
+                                    ampm = "PM";
+                                    hour = hour - 12;
+                                    if (hour == 0) {
+                                        hour = 12;  // noon
+                                    }
+                                }
+
+                                String hourSched = String.valueOf(hour);
+                                String minuteSched = String.valueOf(minute);
+
+                                if(hour < 10){
+                                    hourSched = "0" + hour;
+                                }
+
+                                if(minute < 10){
+                                    minuteSched = "0" + minute;
+                                }
+
+                                String schedTime = hourSched + ":" + minuteSched + " " + ampm;
+
+                                Log.d("initSched", "Schedule data - repeat: " + repeat + ", times: " + schedTime + ", pillQuantities: " + pillQuantitiesObject);
+
+
+                                ScheduleItem scheduleItem = new ScheduleItem();
+                                scheduleItem.setRepeat(Math.toIntExact(repeat));
+                                scheduleItem.setTimes(schedTime);
+                                scheduleItem.setPillQuantities(pillQuantities);
+
+                                list.add(scheduleItem);
+                            } else {
+                                Log.e("initSched", "Null value detected in schedule data");
+                            }
+                        }
+
+                        // Extract data for MedReminder
+                        String repeatStyle = snapshot.child("repeatStyle").getValue(String.class);
+
+                        if (repeatStyle != null) {
+                            MedReminder medReminder = new MedReminder();
+                            medReminder.setRepeatStyle(repeatStyle);
+
+                            if (!list.isEmpty()) {
+                                binding.schedMed.setLayoutManager(new LinearLayoutManager(OutScheduleReceipt.this, LinearLayoutManager.VERTICAL, false));
+                                RecyclerView.Adapter adapter = new PillViewAdapter(list, medReminder);
+                                binding.schedMed.setAdapter(adapter);
+                            }
+                        } else {
+                            Log.e("initSched", "Repeat value in MedReminder is null");
+                        }
+                    } else {
+                        Log.e("initSched", "Schedule snapshot does not exist at path: " + scheduleSnapshot.getRef().toString());
                     }
-
-                    // Extract data for MedReminder
-                    String repeat = snapshot.child("repeat").getValue(String.class);
-
-                    // Add MedReminder to list2
-                    MedReminder medReminder = new MedReminder();
-                    medReminder.setRepeat(repeat);
-
-                    if (!list.isEmpty()){
-                        binding.schedMed.setLayoutManager(new LinearLayoutManager(OutScheduleReceipt.this, LinearLayoutManager.VERTICAL, false));
-                        RecyclerView.Adapter adapter = new PillViewAdapter(list, medReminder);
-                        binding.schedMed.setAdapter(adapter);
-                    }
+                } else {
+                    Log.e("initSched", "Snapshot does not exist at path: " + snapshot.getRef().toString());
                 }
             }
 
             @Override
-            public void onCancelled (@NonNull DatabaseError error) {
-
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("initSched", "Database error: " + error.getMessage());
             }
         });
 
@@ -142,15 +200,15 @@ public class OutScheduleReceipt extends AppCompatActivity {
     private void setVariable () {
         binding.backHome.setOnClickListener(view -> finish());
         binding.medTitle.setText(object.getMedicine());
-        binding.refilledPills.setText(object.getPillsOnTube());
+        binding.refilledPills.setText(String.valueOf(object.getPillsOnTube()));
         binding.dosForm.setText(object.getPillForm());
-        binding.sched.setText(object.getRepeat());
+        binding.sched.setText(object.getRepeatStyle());
         binding.note.setText(object.getNotes());
 
         LinearLayout everyday = findViewById(R.id.everyday_table_row_out);
         LinearLayout custom = findViewById(R.id.custom_table_row_out);
 
-        String repeat = object.getRepeat();
+        String repeat = object.getRepeatStyle();
         Log.d("repeatVal", "Repeat value: " + repeat);
 
         if (repeat != null && repeat.equals("Everyday")) {
@@ -162,13 +220,6 @@ public class OutScheduleReceipt extends AppCompatActivity {
             custom.setVisibility(View.VISIBLE);
             everyday.setVisibility(View.GONE);
         }
-
-//        binding.editMedi.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick (View view) {
-//                startActivity(new Intent(OutScheduleReceipt.this, EditMed.class));
-//            }
-//        });
 
         binding.optionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,6 +244,7 @@ public class OutScheduleReceipt extends AppCompatActivity {
                 options.findViewById(R.id.delete_btn).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick (View view) {
+                        String userId = firebaseUser.getUid();
                         String itemKey = object.getMedId();
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(OutScheduleReceipt.this);
@@ -209,9 +261,9 @@ public class OutScheduleReceipt extends AppCompatActivity {
                         confirmBTN.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick (View view) {
-                                reference = FirebaseDatabase.getInstance().getReference("MedRemind");
+                                reference = FirebaseDatabase.getInstance().getReference("MedRemind").child(userId).child(itemKey);
 
-                                reference.child(itemKey).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess (Void unused) {
                                         //Deletion succesfull

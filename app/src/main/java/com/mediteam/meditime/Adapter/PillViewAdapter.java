@@ -47,11 +47,15 @@ public class PillViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         int viewType = holder.getItemViewType();
         if (viewType == VIEW_TYPE_EVERYDAY) {
 
-            ((EverydayViewHolder) holder).everydayTime.setText(items.get(position).getTime());
+            ((EverydayViewHolder) holder).everydayTime.setText(items.get(position).getTimes());
             ((EverydayViewHolder) holder).everydayPill.setText(String.valueOf(items.get(position).getPillQuantities()));
         } else if (viewType == VIEW_TYPE_CUSTOM) {
-            ((CustomViewHolder) holder).customDay.setText(items.get(position).getDay());
-            ((CustomViewHolder) holder).customTime.setText(items.get(position).getTime());
+            ScheduleItem scheduleItem = items.get(position);
+            int dayOfWeek = scheduleItem.getRepeat();
+            String dayOfWeekString = convertDayOfWeekToString(dayOfWeek);
+
+            ((CustomViewHolder) holder).customDay.setText(dayOfWeekString);
+            ((CustomViewHolder) holder).customTime.setText(items.get(position).getTimes());
             ((CustomViewHolder) holder).customPill.setText(String.valueOf(items.get(position).getPillQuantities()));
         }
     }
@@ -63,7 +67,7 @@ public class PillViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemViewType(int position) {
-        String repeat = items2.getRepeat();
+        String repeat = items2.getRepeatStyle();
         if (repeat.equals("Everyday")) {
             return VIEW_TYPE_EVERYDAY;
         } else if (repeat.equals("Custom")) {
@@ -90,6 +94,27 @@ public class PillViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             customDay = itemView.findViewById(R.id.receipt_custom_day);
             customTime = itemView.findViewById(R.id.receipt_custom_time);
             customPill = itemView.findViewById(R.id.receipt_custom_pill);
+        }
+    }
+
+    private String convertDayOfWeekToString(int dayOfWeek) {
+        switch (dayOfWeek) {
+            case 0:
+                return "SUN";
+            case 1:
+                return "MON";
+            case 2:
+                return "TUE";
+            case 3:
+                return "WED";
+            case 4:
+                return "THU";
+            case 5:
+                return "FRI";
+            case 6:
+                return "SAT";
+            default:
+                return "Unknown";
         }
     }
 }

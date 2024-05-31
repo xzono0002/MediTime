@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -125,7 +126,7 @@
 
                         </LinearLayout>
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/etMedication"
                             style="@style/shadow"
                             android:layout_width="match_parent"
@@ -138,7 +139,8 @@
                             android:paddingHorizontal="14dp"
                             android:textColor="@color/dark10"
                             android:textColorHint="@color/dark20"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:autofillHints=""/>
                     </LinearLayout>
 
 
@@ -252,15 +254,14 @@
                             android:letterSpacing="0.05"
                             android:text="Select Tube:"
                             android:textColor="@color/dark"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:layout_marginEnd="20dp"/>
 
                         <Spinner
                             android:id="@+id/tubeSelect"
                             android:layout_width="match_parent"
                             android:layout_height="33dp"
-                            android:layout_marginStart="20dp"
                             android:background="@drawable/add_med_spinner"
-                            android:paddingHorizontal="10dp"
                             android:paddingVertical="0dp" />
 
                     </LinearLayout>

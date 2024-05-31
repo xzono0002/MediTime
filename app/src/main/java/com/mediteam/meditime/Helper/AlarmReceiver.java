@@ -19,10 +19,45 @@ import com.mediteam.meditime.R;
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive (Context context, Intent intent) {
-        showNotification(context, "Medication Reminder", "It's time to take your medication!");
+        String medicineName = intent.getStringExtra("medicineName");
+        String time = intent.getStringExtra("alarmTime");
+        // Extract hours and minutes from the time string
+        String[] timeParts = time.split(":");
+
+        int hour = Integer.parseInt(timeParts[0]);
+        int minute = Integer.parseInt(timeParts[1]);
+
+        String ampm;
+        if (hour < 12) {
+            ampm = "AM";
+            if (hour == 0) {
+                hour = 12;  // midnight
+            }
+        } else {
+            ampm = "PM";
+            hour = hour - 12;
+            if (hour == 0) {
+                hour = 12;  // noon
+            }
+        }
+
+        String hourSched = String.valueOf(hour);
+        String minuteSched = String.valueOf(minute);
+
+        if(hour < 10){
+            hourSched = "0" + hour;
+        }
+
+        if(minute < 10){
+            minuteSched = "0" + minute;
+        }
+
+        String schedTime = hourSched + ":" + minuteSched + " " + ampm;
+
+        showNotification(context, "Medication Reminder", "It's time to take your medication!", "Your prescription pill, " + medicineName + " should be taken by " + schedTime + ". Please drink your meds immediately.");
     }
 
-    private void showNotification(Context context, String title, String message){
+    private void showNotification(Context context, String title, String message, String bigMessage){
         // Create and show the notification
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -35,6 +70,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.logo_notif_small)
                 .setContentTitle(title)
                 .setContentText(message)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .setBigContentTitle(title)
+                        .bigText(bigMessage))
                 .setLargeIcon(largeIcon)
                 .setSound(soundUri)
                 .setVibrate(new long[]{500, 500})

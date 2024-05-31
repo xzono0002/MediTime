@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -43,7 +45,8 @@ public class DashboardFragment extends Fragment {
     private FloatingActionButton addMed;
     private ProgressBar progressBar1, progressBar2;
     private RecyclerView insideMedi, outsideMedi;
-    private SwipeRefreshLayout swipeContainer;
+    private static final String TAG = "DashboardFragment";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -117,22 +120,36 @@ public class DashboardFragment extends Fragment {
     private void initSchedinMed () {
         progressBar1.setVisibility(View.VISIBLE);
         ArrayList<MedReminder> list = new ArrayList<>();
-
-        reference = FirebaseDatabase.getInstance().getReference("MedRemind");
         String userID = firebaseUser.getUid();
-        Query query = reference.orderByChild("userid").equalTo(userID);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        reference = FirebaseDatabase.getInstance().getReference("MedRemind").child(userID);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange (@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        MedReminder medReminder = dataSnapshot.getValue(MedReminder.class);
-                        if(medReminder != null && medReminder.getInStorage()){
-                            list.add(medReminder);
-                        } else binding.inNull.setVisibility(View.VISIBLE);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Log.d(TAG, "inMedi Data available ");
+
+                    for (DataSnapshot medReminderSnapshot : snapshot.getChildren()) {
+                        try {
+                            Log.d(TAG, "MedReminder DataSnapshot inMedi: " + medReminderSnapshot.toString());
+                            MedReminder medReminder = medReminderSnapshot.getValue(MedReminder.class);
+                            if (medReminder != null) {
+                                Log.d(TAG, "MedReminder inMedi: " + medReminder.toString());
+                                if (medReminder.getInStorage()) {
+                                    list.add(medReminder);
+                                    binding.inNull.setVisibility(View.GONE);
+                                } else {
+                                    binding.inNull.setVisibility(View.VISIBLE);
+                                }
+                            } else {
+                                Log.d(TAG, "MedReminder is null inMedi");
+                            }
+                        } catch (DatabaseException e) {
+                            Log.e(TAG, "Failed to convert value inMedi: ", e);
+                        }
                     }
 
-                    if (list.size() > 0){
+                    if (list.size() > 0) {
                         insideMedi.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                         RecyclerView.Adapter adapter = new insideMedAdapter(list);
                         insideMedi.setAdapter(adapter);
@@ -140,13 +157,17 @@ public class DashboardFragment extends Fragment {
                     }
 
                     progressBar1.setVisibility(View.GONE);
+                } else {
+                    // If snapshot does not exist, show inNull
+                    binding.inNull.setVisibility(View.VISIBLE);
+                    progressBar1.setVisibility(View.GONE);
                 }
-                progressBar1.setVisibility(View.GONE);
             }
 
             @Override
-            public void onCancelled (@NonNull DatabaseError error) {
-
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle onCancelled
+                progressBar1.setVisibility(View.GONE);
             }
         });
 
@@ -155,22 +176,36 @@ public class DashboardFragment extends Fragment {
     private void initSchedoutMed () {
         progressBar2.setVisibility(View.VISIBLE);
         ArrayList<MedReminder> list = new ArrayList<>();
-
-        reference = FirebaseDatabase.getInstance().getReference("MedRemind");
         String userID = firebaseUser.getUid();
-        Query query = reference.orderByChild("userid").equalTo(userID);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        reference = FirebaseDatabase.getInstance().getReference("MedRemind").child(userID);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange (@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        MedReminder medReminder = dataSnapshot.getValue(MedReminder.class);
-                        if(medReminder != null && !medReminder.getInStorage()){
-                            list.add(medReminder);
-                        } else binding.outNull.setVisibility(View.VISIBLE);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Log.d(TAG, "outMedi Data available ");
+
+                    for (DataSnapshot medReminderSnapshot : snapshot.getChildren()) {
+                        try {
+                            Log.d(TAG, "MedReminder DataSnapshot outMedi: " + medReminderSnapshot.toString());
+                            MedReminder medReminder = medReminderSnapshot.getValue(MedReminder.class);
+                            if (medReminder != null) {
+                                Log.d(TAG, "MedReminder outMedi: " + medReminder.toString());
+                                if (!medReminder.getInStorage()) {
+                                    list.add(medReminder);
+                                    binding.outNull.setVisibility(View.GONE);
+                                } else {
+                                    binding.outNull.setVisibility(View.VISIBLE);
+                                }
+                            } else {
+                                Log.d(TAG, "MedReminder is null outMedi");
+                            }
+                        } catch (DatabaseException e) {
+                            Log.e(TAG, "Failed to convert value outMedi: ", e);
+                        }
                     }
 
-                    if (list.size() > 0){
+                    if (list.size() > 0) {
                         outsideMedi.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                         RecyclerView.Adapter adapter = new outsideMedAdapter(list);
                         outsideMedi.setAdapter(adapter);
@@ -178,16 +213,19 @@ public class DashboardFragment extends Fragment {
                     }
 
                     progressBar2.setVisibility(View.GONE);
+                } else {
+                    // If snapshot does not exist, show inNull
+                    binding.outNull.setVisibility(View.VISIBLE);
+                    progressBar2.setVisibility(View.GONE);
                 }
-                progressBar2.setVisibility(View.GONE);
             }
 
             @Override
-            public void onCancelled (@NonNull DatabaseError error) {
-
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle onCancelled
+                progressBar1.setVisibility(View.GONE);
             }
         });
-
     }
 
 

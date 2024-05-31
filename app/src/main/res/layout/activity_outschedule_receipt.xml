@@ -378,6 +378,6 @@
 
     </LinearLayout>
 
-    <include layout="@layout/options"/>
+    <include layout="@layout/options_out"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

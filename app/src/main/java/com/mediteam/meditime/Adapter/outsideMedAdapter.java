@@ -35,7 +35,7 @@ public class outsideMedAdapter extends RecyclerView.Adapter<outsideMedAdapter.vi
     @Override
     public void onBindViewHolder (@NonNull outsideMedAdapter.viewholder holder, int position) {
         holder.medItem.setText(items.get(position).getMedicine());
-        holder.day.setText(items.get(position).getRepeat());
+        holder.day.setText(items.get(position).getRepeatStyle());
 
         holder.itemView.setOnClickListener(view -> {
            Intent intent = new Intent(context, OutScheduleReceipt.class);

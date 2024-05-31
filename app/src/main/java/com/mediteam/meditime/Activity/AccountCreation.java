@@ -211,6 +211,10 @@ public class AccountCreation extends AppCompatActivity {
                         @Override
                         public void onComplete (@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
+
+                                DatabaseReference commandRef = FirebaseDatabase.getInstance().getReference("commands").child(firebaseUser.getUid());
+                                commandRef.child("emptyTube").setValue(9);
+
                                 firebaseUser.sendEmailVerification();
 
                                 createAcc.setVisibility(View.VISIBLE);
